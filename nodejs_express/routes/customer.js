@@ -24,7 +24,11 @@ router.post('/', async (req, res, next) =>
 		}
 
 		res.cookie('guid', customer.guid, { maxAge: 900000, httpOnly: true });
-
+		
+		// add customer to DB
+		const usercol = db.get().collection("users");
+		const p = usercol.insertOne(customer);
+		console.log('Customer added!')
 		// created the customer! 
 		return res.status(201).json({ customer: customer });
 	}
@@ -35,6 +39,22 @@ router.post('/', async (req, res, next) =>
         	return res.status(400).json({ error: err.message });
 		}
 
+		// unexpected error
+		return next(err);
+	}
+});
+
+/* retrieves a customer by uid */
+router.get('/:id', async (req, res, next) =>
+{
+	try
+	{
+		const customer = await CustomerService.retrieve(req.params.id);
+
+		return res.json({ customer: customer });
+	}
+	catch(err)
+	{
 		// unexpected error
 		return next(err);
 	}

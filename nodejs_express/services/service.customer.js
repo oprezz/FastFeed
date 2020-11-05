@@ -52,8 +52,9 @@ class CustomerService
 
 		let customer = new CustomerModel(data.first_name, data.last_name, data.email, data.zipcode, data.password);
 
-		customer.uid = 'c' + counter++;
+		// TODO check if email already exists.. 
 
+		customer.uid = 'c' + counter++;
 		customers[customer.uid] = customer;
 
 		return customer;

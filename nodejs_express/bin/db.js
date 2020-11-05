@@ -31,7 +31,8 @@ const dbName = "FastFeedDB";
 
 function connect(callback){
     mongoClient.connect(mongoDbUrl, (err, db) => {
-        mongodb = db.db('FastFeedDB');
+        if (err) return console.log(err);
+        mongodb = db.db(dbName);
         callback();
     });
 }
