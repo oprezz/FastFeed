@@ -9,9 +9,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { OurGoalComponent } from './components/our-goal/our-goal.component';
 import { WeatherComponent } from './components/weather/weather.component';
+import { GreetingsPageComponent } from './components/greetings-page/greetings-page.component';
+import { AlertComponent } from './components/alert';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { WeatherAPIService } from './services/weather-api.service';
+import { AccountModule } from './account/account.module';
+import { AccountRoutingModule } from './account/account-routing.module'
 
 @NgModule({
   declarations: [
@@ -21,10 +25,14 @@ import { WeatherAPIService } from './services/weather-api.service';
     FooterComponent,
     DashboardComponent,
     OurGoalComponent,
-    WeatherComponent
+    WeatherComponent,
+    GreetingsPageComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
+    AccountModule, 
+    AccountRoutingModule,
     AppRoutingModule,
     HttpClientModule
   ],
