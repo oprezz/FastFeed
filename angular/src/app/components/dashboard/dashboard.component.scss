@@ -5,12 +5,14 @@
   grid-area: weather;
   margin: 25px;
   margin-right: 0;
+  z-index: 1;
 }
 
 #item-calendar {
   grid-area: calendar;
   margin: 25px;
   margin-right: 0;
+  z-index: 1;
 }
 
 #item-details {
