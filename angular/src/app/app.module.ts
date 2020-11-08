@@ -12,6 +12,8 @@ import { WeatherComponent } from './components/weather/weather.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { WeatherAPIService } from './services/weather-api.service';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { FoodDetailsComponent } from './components/food-details/food-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { WeatherAPIService } from './services/weather-api.service';
     FooterComponent,
     DashboardComponent,
     OurGoalComponent,
-    WeatherComponent
+    WeatherComponent,
+    CalendarComponent,
+    FoodDetailsComponent
   ],
   imports: [
     BrowserModule,

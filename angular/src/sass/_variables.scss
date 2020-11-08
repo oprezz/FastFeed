@@ -2,7 +2,7 @@
 
 $iHeaderBackgroundColor: #EEF8F7;
 
-$iBackgroundGreyLight: #6B6E70;
+$iBackgroundGreyLight: #a4a4a4;
 $iBackgroundGreyDark: #474B4F;
 $iBackgroundBlack: #222629;
 $iBackgroundGreenLight: #16DD0B;
@@ -20,7 +20,6 @@ $cardHeaderBackgroundColor: $iHeaderBackgroundColor;
 .my-card-wrapper {
   @extend .card;
   border: 0px solid $iBackgroundGreyDark;
-  margin: 10px 30px 10px 30px;
   box-shadow:
     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -29,7 +28,9 @@ $cardHeaderBackgroundColor: $iHeaderBackgroundColor;
     0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
-  max-width: 24rem;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .my-card-header {
@@ -41,4 +42,5 @@ $cardHeaderBackgroundColor: $iHeaderBackgroundColor;
 .my-card-body {
   @extend .card-body;
   color: $iBackgroundBlack;
+  overflow: auto;
 }

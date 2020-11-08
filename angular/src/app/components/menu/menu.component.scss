@@ -4,10 +4,8 @@
 #sidebar-wrapper{
   background: $iBackgroundBlack;
   transition:all .5s;
-  display:flex;
   height: 100%;
   width: 100%;
-  align-items: flex-start;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
