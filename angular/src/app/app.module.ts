@@ -7,16 +7,23 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { OurGoalComponent } from './components/our-goal/our-goal.component';
+import { WeatherComponent } from './components/weather/weather.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    OurGoalComponent,
+    WeatherComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
