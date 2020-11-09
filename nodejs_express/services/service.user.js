@@ -46,7 +46,7 @@ class UserService
 			};
 		}
 
-		let user = new UserModel(data.first_name, data.last_name, data.username, data.password);
+		let user = new UserModel(data.firstName, data.lastName, data.username, data.password);
 		// TODO check if email already exists.. 
 
 		user.uid = 'c' + counter++;
