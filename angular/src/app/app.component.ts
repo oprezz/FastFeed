@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'angular';
 
   user: User;
+
   constructor(private accountService : AccountService) {
     this.accountService.user.subscribe(x => this.user = x);
   }

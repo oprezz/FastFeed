@@ -49,15 +49,15 @@ export class AccountService {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-    getById(id: string) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+    getById(guid: string) {
+        return this.http.get<User>(`${environment.apiUrl}/users/${guid}`);
     }
 
-    update(id, params) {
-        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+    update(guid, params) {
+        return this.http.put(`${environment.apiUrl}/users/${guid}`, params)
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
-                if (id == this.userValue.id) {
+                if (guid == this.userValue.guid) {
                     // update local storage
                     const user = { ...this.userValue, ...params };
                     localStorage.setItem('user', JSON.stringify(user));
@@ -69,11 +69,11 @@ export class AccountService {
             }));
     }
 
-    delete(id: string) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`)
+    delete(guid: string) {
+        return this.http.delete(`${environment.apiUrl}/users/${guid}`)
             .pipe(map(x => {
                 // auto logout if the logged in user deleted their own record
-                if (id == this.userValue.id) {
+                if (guid == this.userValue.guid) {
                     this.logout();
                 }
                 return x;

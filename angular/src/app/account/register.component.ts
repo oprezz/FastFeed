@@ -1,8 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from "@angular/common/http";
 import { first } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
 import { AccountService, AlertService } from '../services';
 
 @Component({ templateUrl: 'register.component.html' })
@@ -10,21 +12,29 @@ export class RegisterComponent implements OnInit {
     form: FormGroup;
     loading = false;
     submitted = false;
+    guid: string;
 
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
-        private alertService: AlertService
-    ) { }
+        private alertService: AlertService,
+        private http: HttpClient
+    ) { 
+        this.http.get(`${environment.apiUrl}/user/generate_uid`).subscribe((data:any) => {
+            this.guid = data.guid;
+        }, error => {
+            console.log("There was an error enerating the proper HUID on the server", error);
+        });
+    }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(6)]],
         });
     }
 
@@ -43,6 +53,7 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
+        this.form.value.guid = this.guid;
         this.accountService.register(this.form.value)
             .pipe(first())
             .subscribe({

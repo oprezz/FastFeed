@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var generate_uid = require('./routes/generate_uid');
-var customer = require('./routes/customer');
+var user = require('./routes/user');
 var db = require('./bin/db.js')
 
 let reporter = function (type, ...rest)
@@ -50,7 +50,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/api/v1/customer', customer);
-app.use('/api/v1/generate_uid', generate_uid);
+app.use('/users', user);
+app.use('/user/generate_uid', generate_uid);
 
 module.exports = app;

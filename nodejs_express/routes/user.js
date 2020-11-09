@@ -1,39 +1,39 @@
 var express = require('express');
 var router = express.Router();
-var CustomerService = require('../services/service.customer');
+var UserService = require('../services/service.user');
 var db = require('../bin/db.js')
 
-/* GET customer listing. */
+/* GET user listing. */
 router.get('/', async function(req, res, next)
 {
-	res.json({error: "Invalid Customer UID."});
+	res.json({error: "Invalid User UID."});
 });
 
-/* adds a new customer to the list */
-router.post('/', async (req, res, next) =>
+/* adds a new user to the list */
+router.post('/register', async (req, res, next) =>
 {
 	const body = req.body;
-
+	console.log('Post register invoked!');
+	console.log(body);
 	try
 	{
-		const customer = await CustomerService.create(body);
-
+		const user = await UserService.create(body);
 		if(body.guid != null)
 		{
-			customer.guid = body.guid;
+			user.guid = body.guid;
 		}
-
-		res.cookie('guid', customer.guid, { maxAge: 900000, httpOnly: true });
+		res.cookie('guid', user.guid, { maxAge: 900000, httpOnly: true });
 		
-		// add customer to DB
+		// add user to DB
 		const usercol = db.get().collection("users");
-		const p = usercol.insertOne(customer);
-		console.log('Customer added!')
-		// created the customer! 
-		return res.status(201).json({ customer: customer });
+		const p = usercol.insertOne(user);
+		console.log('User added!')
+		// created the user! 
+		return res.status(201).json({ user: user });
 	}
 	catch(err)
 	{
+		console.log('5');
 		if (err.name === 'ValidationError')
 		{
         	return res.status(400).json({ error: err.message });
@@ -44,14 +44,14 @@ router.post('/', async (req, res, next) =>
 	}
 });
 
-/* retrieves a customer by uid */
+/* retrieves a user by uid */
 router.get('/:id', async (req, res, next) =>
 {
 	try
 	{
-		const customer = await CustomerService.retrieve(req.params.id);
+		const user = await UserService.retrieve(req.params.id);
 
-		return res.json({ customer: customer });
+		return res.json({ user: user });
 	}
 	catch(err)
 	{
@@ -76,14 +76,14 @@ router.get('/:id', async (req, res, next) =>
 // 	}
 // });
 
-/* updates the customer by uid */
+/* updates the user by uid */
 router.put('/:id', async (req, res, next) =>
 {
 	try
 	{
-		const customer = await CustomerService.update(req.params.id, req.body);
+		const user = await UserService.update(req.params.id, req.body);
 
-		return res.json({ customer: customer });
+		return res.json({ user: user });
 	}
 	catch(err)
 	{
@@ -92,12 +92,12 @@ router.put('/:id', async (req, res, next) =>
 	}
 });
 
-/* removes the customer from the customer list by uid */
+/* removes the user from the user list by uid */
 router.delete('/:id', async (req, res, next) =>
 {
 	try
 	{
-		const customer = await CustomerService.delete(req.params.id);
+		const user = await UserService.delete(req.params.id);
 
 		return res.json({success: true});
 	}
@@ -108,24 +108,24 @@ router.delete('/:id', async (req, res, next) =>
 	}
 });
 
-/* checks customer login TODO */
+/* checks user login TODO */
 router.post('/login', async (req, res, next) =>
 {
 	const body = req.body;
 
 	try
 	{
-		const customer = await CustomerService.create(body);
+		const user = await UserService.create(body);
 
 		if(body.guid != null)
 		{
-			customer.guid = body.guid;
+			user.guid = body.guid;
 		}
 
-		res.cookie('guid', customer.guid, { maxAge: 900000, httpOnly: true });
+		res.cookie('guid', user.guid, { maxAge: 900000, httpOnly: true });
 
-		// created the customer! 
-		return res.status(201).json({ customer: customer });
+		// created the user! 
+		return res.status(201).json({ user: user });
 	}
 	catch(err)
 	{
