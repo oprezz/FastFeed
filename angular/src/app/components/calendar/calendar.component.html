@@ -1,6 +1,9 @@
 <div class="my-card-wrapper">
   <div class="my-card-header">Calendar</div>
   <div class="my-card-body">
-    <ejs-schedule [selectedDate]="todaysDate" [currentView]="calendarView"></ejs-schedule>
+    <ejs-uploader id='ics-import' cssClass='calendar-import' [multiple]='multiple' [buttons]='buttons'
+                  [showFileList]='showFileList' allowedExtensions='.ics' (selected)='onSelected($event)'></ejs-uploader>
+    <ejs-schedule #scheduleObj width='100%' height='100%' [views]="scheduleViews" [selectedDate]="selectedDate"  [currentView]="currentView" >
+      <e-views><e-view option='Day'></e-view></e-views></ejs-schedule>
   </div>
 </div>

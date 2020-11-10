@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
+import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 // Services
 import { WeatherAPIService } from './services/weather-api.service';
-import { DayService, AgendaService } from '@syncfusion/ej2-angular-schedule';
-import { View } from '@syncfusion/ej2-schedule';
+import { DayService, AgendaService, ICalendarImportService } from '@syncfusion/ej2-angular-schedule';
 // Components
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -36,14 +37,17 @@ import { FoodDetailsComponent } from './components/food-details/food-details.com
     AppRoutingModule,
     HttpClientModule,
     // Calendar modules
-    ScheduleModule
+    ScheduleModule,
+    UploaderModule,
+    ButtonModule
   ],
   providers: [
     // Weather API services
     WeatherAPIService,
     // Calendar services
     DayService,
-    AgendaService
+    AgendaService,
+    ICalendarImportService
   ],
   bootstrap: [AppComponent]
 })
