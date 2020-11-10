@@ -1,0 +1,19 @@
+@import "~src/sass/variables";
+
+.profile-text {
+  font-size: 24px;
+  color: $iBackgroundBlack;
+  vertical-align: middle;
+}
+
+.my-header {
+  background-color: $iHeaderBackgroundColor;
+  height: 100%;
+  width: 100%;
+}
+
+.my-button {
+  @extend .btn;
+  @extend .btn-outline-dark;
+  float: right;
+}

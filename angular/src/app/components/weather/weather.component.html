@@ -1,0 +1,11 @@
+<div class="my-card-wrapper" style="height: 200px;">
+  <div class="my-card-header">Weather</div>
+  <div class="my-card-body">
+    <h5 class="card-title">{{weather.city}}</h5>
+    <img [src]="weather.icon" style="float: right;"/>
+    <p>
+      Conditions: {{weather.conditions}}<br/>
+      Temperature: {{weather.temperature}} °C<br/>
+    </p>
+  </div>
+</div>
