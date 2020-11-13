@@ -11,5 +11,4 @@ export class FoodDetailsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

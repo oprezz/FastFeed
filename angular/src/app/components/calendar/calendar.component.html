@@ -7,10 +7,8 @@
   </div>
   <div class="my-card-body">
     <ejs-schedule #scheduleObj width='100%' height='100%' [views]="scheduleViews" [selectedDate]="selectedDate"
-                  [currentView]="currentView" [allowResizing]="allowResizing" [allowDragAndDrop]="allowDragDrop">
+                  [currentView]="currentView" (eventClick)="onEventClick($event)">
       <e-views><e-view option='Day'></e-view></e-views>
     </ejs-schedule>
-    <ejs-contextmenu #menuObj cssClass='schedule-context-menu' target='.e-schedule' [items]='menuItems'
-                     (beforeOpen)='onContextMenuBeforeOpen($event)' (select)='onMenuItemSelect($event)'></ejs-contextmenu>
   </div>
 </div>

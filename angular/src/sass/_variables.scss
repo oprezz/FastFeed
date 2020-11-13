@@ -44,3 +44,9 @@ $cardHeaderBackgroundColor: $iHeaderBackgroundColor;
   color: $iBackgroundBlack;
   overflow: auto;
 }
+
+.my-button {
+  @extend .btn;
+  @extend .btn-outline-dark;
+  float: right;
+}
