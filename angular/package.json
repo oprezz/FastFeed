@@ -21,6 +21,7 @@
     "@angular/router": "~10.2.0",
     "@syncfusion/ej2-angular-buttons": "^18.3.47",
     "@syncfusion/ej2-angular-inputs": "^18.3.48",
+    "@syncfusion/ej2-angular-navigations": "^18.3.47",
     "@syncfusion/ej2-angular-schedule": "^18.3.47",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",

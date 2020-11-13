@@ -1,9 +1,16 @@
 <div class="my-card-wrapper">
-  <div class="my-card-header">Calendar</div>
+  <div class="my-card-header">Calendar
+    <ejs-uploader id='ics-import' cssClass='calendar-import' style="float: right; height: 100%;"
+                  [multiple]='multiple' [buttons]='buttons' [showFileList]='showFileList' allowedExtensions='.ics'
+                  (selected)='onSelected($event)'></ejs-uploader>
+
+  </div>
   <div class="my-card-body">
-    <ejs-uploader id='ics-import' cssClass='calendar-import' [multiple]='multiple' [buttons]='buttons'
-                  [showFileList]='showFileList' allowedExtensions='.ics' (selected)='onSelected($event)'></ejs-uploader>
-    <ejs-schedule #scheduleObj width='100%' height='100%' [views]="scheduleViews" [selectedDate]="selectedDate"  [currentView]="currentView" >
-      <e-views><e-view option='Day'></e-view></e-views></ejs-schedule>
+    <ejs-schedule #scheduleObj width='100%' height='100%' [views]="scheduleViews" [selectedDate]="selectedDate"
+                  [currentView]="currentView" [allowResizing]="allowResizing" [allowDragAndDrop]="allowDragDrop">
+      <e-views><e-view option='Day'></e-view></e-views>
+    </ejs-schedule>
+    <ejs-contextmenu #menuObj cssClass='schedule-context-menu' target='.e-schedule' [items]='menuItems'
+                     (beforeOpen)='onContextMenuBeforeOpen($event)' (select)='onMenuItemSelect($event)'></ejs-contextmenu>
   </div>
 </div>

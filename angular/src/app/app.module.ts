@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { ContextMenuModule } from '@syncfusion/ej2-angular-navigations';
 // Services
 import { WeatherAPIService } from './services/weather-api.service';
 import { DayService, AgendaService, ICalendarImportService } from '@syncfusion/ej2-angular-schedule';
@@ -39,7 +40,8 @@ import { FoodDetailsComponent } from './components/food-details/food-details.com
     // Calendar modules
     ScheduleModule,
     UploaderModule,
-    ButtonModule
+    ButtonModule,
+    ContextMenuModule
   ],
   providers: [
     // Weather API services
