@@ -1,13 +1,13 @@
 <div class="my-card-wrapper">
   <div class="my-card-header">Calendar
-    <ejs-uploader id='ics-import' cssClass='calendar-import' style="float: right; height: 100%;"
+    <ejs-uploader id='ics-import' cssClass='calendar-import' style="float: right;"
                   [multiple]='multiple' [buttons]='buttons' [showFileList]='showFileList' allowedExtensions='.ics'
                   (selected)='onSelected($event)'></ejs-uploader>
 
   </div>
   <div class="my-card-body">
     <ejs-schedule #scheduleObj width='100%' height='100%' [views]="scheduleViews" [selectedDate]="selectedDate"
-                  [currentView]="currentView" (eventClick)="onEventClick($event)">
+                  [currentView]="currentView" (eventClick)="onEventClick($event)" [eventSettings]="eventSettings">
       <e-views><e-view option='Day'></e-view></e-views>
     </ejs-schedule>
   </div>

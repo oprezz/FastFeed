@@ -3,9 +3,9 @@
     <app-weather></app-weather>
   </div>
   <div id="item-calendar">
-    <app-calendar></app-calendar>
+    <app-calendar #calendar (sendDetailsEmitter)="details.receiveFoodId($event)"></app-calendar>
   </div>
   <div id="item-details" hidden="true">
-    <app-food-details></app-food-details>
+    <app-food-details #details></app-food-details>
   </div>
 </div>

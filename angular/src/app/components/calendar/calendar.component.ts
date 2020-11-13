@@ -1,39 +1,28 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-
+import {Component, OnInit, ViewChild, EventEmitter, Output} from '@angular/core';
 import {EventSettingsModel, View} from '@syncfusion/ej2-schedule';
 import {ScheduleComponent, EventClickArgs} from '@syncfusion/ej2-angular-schedule';
 import {SelectedEventArgs} from '@syncfusion/ej2-inputs';
-import {log} from 'util';
-
-export let scheduleData: object[] = [
-  {
-    Id: 1,
-    Subject: 'Explosion of Betelgeuse Star',
-    StartTime: new Date(2020, 11, 10, 9, 30),
-    EndTime: new Date(2020, 11, 10, 11, 0),
-    CategoryColor: '#1aaa55'
-  }];
-
+import { eventsData, EventData } from '../../classes/events';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit {
-  public todaysDate = new Date();
-  public calendarView: View = 'Day';
-
   @ViewChild('scheduleObj')
   public scheduleObj: ScheduleComponent;
   public selectedDate: Date = new Date();
   public scheduleViews: View[] = ['Day'];
-  public eventSettings: EventSettingsModel = { dataSource: scheduleData };
+  public eventSettings: EventSettingsModel = {
+    dataSource: eventsData
+  };
   public currentView: View = 'Day';
   public showFileList = false;
   public multiple = false;
   public buttons = { browse: 'Choose file' };
+  // For event triggering
+  @Output() sendDetailsEmitter = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -44,7 +33,8 @@ export class CalendarComponent implements OnInit {
   }
 
   onEventClick(args: EventClickArgs): void {
-    let detailsDocument = document.getElementById('item-details') as HTMLDivElement;
-    detailsDocument.hidden = false;
+    if ((args.event as unknown as EventData).EventType === 'food'){
+      this.sendDetailsEmitter.emit(parseInt((args.event as unknown as EventData).Other, 10));
+    }
   }
 }

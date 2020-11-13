@@ -6,6 +6,7 @@
   margin: 25px;
   margin-right: 0;
   z-index: 1;
+  position: relative;
 }
 
 #item-calendar {
@@ -16,13 +17,17 @@
   margin-right: -50px;
   margin-top: -50px;
   padding: 50px;
+  position: relative;
 }
 
 #item-details {
   grid-area: details;
   overflow: hidden;
   margin: -25px;
+  margin-left: 0;
   padding: 50px;
+  z-index: 1;
+  position: relative;
 }
 
 #dashboard-container {
