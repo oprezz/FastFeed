@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { WeatherAPIService } from './services/weather-api.service';
 import { AccountModule } from './account/account.module';
 import { AccountRoutingModule } from './account/account-routing.module'
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AccountRoutingModule } from './account/account-routing.module'
     AccountModule, 
     AccountRoutingModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [
     WeatherAPIService

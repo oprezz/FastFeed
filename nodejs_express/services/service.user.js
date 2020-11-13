@@ -1,5 +1,6 @@
 const UserModel = require("../models/model.user");
 let Validator = require('fastest-validator');
+var db = require('../bin/db.js')
 
 
 let users = {};
@@ -27,7 +28,7 @@ const userVSchema = {
 /* static user service class */
 class UserService
 {
-	static create(data)
+	static async create(data)
 	{
 		var vres = userValidator.validate(data, userVSchema);
 		/* validation failed */
@@ -48,49 +49,84 @@ class UserService
 
 		let user = new UserModel(data.firstName, data.lastName, data.username, data.password);
 		// TODO check if email already exists.. 
-
-		user.uid = 'c' + counter++;
-		users[user.uid] = user;
+		const usercol = db.get().collection("users");
+		await usercol.insertOne(user);
 
 		return user;
 	}
 
-	static retrieve(uid)
+	static async updateGuid(_username, _guid)
 	{
-		if(users[uid] != null)
+		console.log("Guid update requested!", _username);
+		const usercol = db.get().collection("users");
+		var user = await usercol.findOne({username: _username});
+		user.guid = _guid;
+		const newvalues = {$set: {guid: user.guid}};
+		user = await usercol.updateOne({username : _username}, newvalues);
+		// user = usercol.findOne({username: _username});
+		console.log("Guid updated!");
+		
+		return user;
+	}
+
+	static async retrieve(_username)
+	{
+		console.log('Requested user by username:', _username);
+		const usercol = db.get().collection("users");
+		const user = await usercol.findOne({username: _username});
+		if(user == null)
 		{
-			return users[uid];
+			console.error('Unable to retrieve a user by (username:'+ _username +')');
 		}
 		else
 		{
-			throw new Error('Unable to retrieve a user by (uid:'+ uid +')');
+			console.log('User (username:'+ _username +') retrieved from DB!');
+		}
+
+		return user;
+	}
+
+	static async update(_user)
+	{
+		try {
+			await db.get().collection("users").replaceOne(
+				{ username : _user.username },
+				{ _user} ,
+				{ upsert: true }
+			);
+		}
+		catch (err) {
+			console.error(err);
 		}
 	}
 
-	static update(uid, data)
+	static async delete(_username)
 	{
-		if(users[uid] != null)
-		{
-			const user = users[uid];
-			
-			Object.assign(user, data);
+		try{
+			await db.get().collection("users").remove({username : _username});
 		}
-		else
-		{
-			throw new Error('Unable to retrieve a user by (uid:'+ cuid +')');
+		catch (err) {
+			console.error(err);
+		}			
+	}
+	
+	static async login(_username, _password){
+		const user = await UserService.retrieve(_username);
+		if (user.password == _password){
+			console.log("User PW correct!")
+			return user;
+		} else { 
+			console.log("User PW incorrect!") // TODO inform user
+			return null;
 		}
 	}
 
-	static delete(uid)
+	static async getAll()
 	{
-		if(users[uid] != null)
-		{
-			delete users[uid];
-		}
-		else
-		{
-			throw new Error('Unable to retrieve a user by (uid:'+ cuid +')');
-		}
+		await db.get().collection('users').find({}).toArray()
+			.then((users) => {
+				console.log('Users', users);
+		});
 	}
 }
 

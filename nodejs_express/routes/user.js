@@ -17,17 +17,16 @@ router.post('/register', async (req, res, next) =>
 	console.log(body);
 	try
 	{
-		const user = await UserService.create(body);
+		
+		let user = await UserService.create(body);
 		if(body.guid != null)
 		{
 			user.guid = body.guid;
 		}
+
 		res.cookie('guid', user.guid, { maxAge: 900000, httpOnly: true });
-		
-		// add user to DB
-		const usercol = db.get().collection("users");
-		const p = usercol.insertOne(user);
-		console.log('User added!')
+		user = await UserService.updateGuid(user.username, user.guid);
+
 		// created the user! 
 		return res.status(201).json({ user: user });
 	}
@@ -45,29 +44,13 @@ router.post('/register', async (req, res, next) =>
 });
 
 /* retrieves a user by uid */
-router.get('/:id', async (req, res, next) =>
-{
-	try
-	{
-		const user = await UserService.retrieve(req.params.id);
-
-		return res.json({ user: user });
-	}
-	catch(err)
-	{
-		// unexpected error
-		return next(err);
-	}
-});
-
-/* retrieves a customer by uid */
 // router.get('/:id', async (req, res, next) =>
 // {
 // 	try
 // 	{
-// 		const customer = await CustomerService.retrieve(req.params.id);
+// 		const user = await UserService.retrieve(req.params.id);
 
-// 		return res.json({ customer: customer });
+// 		return res.json({ user: user });
 // 	}
 // 	catch(err)
 // 	{
@@ -76,12 +59,28 @@ router.get('/:id', async (req, res, next) =>
 // 	}
 // });
 
-/* updates the user by uid */
-router.put('/:id', async (req, res, next) =>
+/* retrieves a customer by username */
+router.get('/user', async (req, res, next) =>
 {
 	try
 	{
-		const user = await UserService.update(req.params.id, req.body);
+		// req.params.id
+		const user = await UserService.retrieve(req.query.username);
+		return res.json({user: user})
+	}
+	catch(err)
+	{
+		// unexpected error
+		return next(err);
+	}
+});
+
+/* updates the user by uid */
+router.put('/username', async (req, res, next) =>
+{
+	try
+	{
+		const user = await UserService.update(req.query.username, req.body);
 
 		return res.json({ user: user });
 	}
@@ -93,11 +92,11 @@ router.put('/:id', async (req, res, next) =>
 });
 
 /* removes the user from the user list by uid */
-router.delete('/:id', async (req, res, next) =>
+router.delete('/username', async (req, res, next) =>
 {
 	try
 	{
-		const user = await UserService.delete(req.params.id);
+		const user = await UserService.delete(req.query.username);
 
 		return res.json({success: true});
 	}
@@ -109,23 +108,25 @@ router.delete('/:id', async (req, res, next) =>
 });
 
 /* checks user login TODO */
-router.post('/login', async (req, res, next) =>
+router.post('/authenticate', async (req, res, next) =>
 {
 	const body = req.body;
-
 	try
 	{
-		const user = await UserService.create(body);
+		const user = await UserService.login(body.username, body.password);
+		console.log("Login requested for user:", user);
 
-		if(body.guid != null)
+		if (user.guid != null)
 		{
-			user.guid = body.guid;
+			res.cookie('guid', user.guid, { maxAge: 900000, httpOnly: true });
+
+			// created the user! 
+			return res.status(200).json({ user: user });
 		}
-
-		res.cookie('guid', user.guid, { maxAge: 900000, httpOnly: true });
-
-		// created the user! 
-		return res.status(201).json({ user: user });
+		else
+		{
+			return res.status(400).json({error: "Password is not correct"});
+		}
 	}
 	catch(err)
 	{
@@ -140,10 +141,8 @@ router.post('/login', async (req, res, next) =>
 });
 
 router.get('/users', (req, res) => {
-	db.get().collection('people').find({}).toArray()
-	.then((users) => {
-            console.log('Users', users);
-        });
+	UserService.getAll();
+	return;
 });
 
 module.exports = router;

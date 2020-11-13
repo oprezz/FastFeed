@@ -8,6 +8,7 @@ export class LayoutComponent {
     constructor(
         private router: Router,
         private accountService: AccountService
+
     ) {
         
         // redirect to home if already logged in
