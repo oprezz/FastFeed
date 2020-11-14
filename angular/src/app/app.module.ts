@@ -1,7 +1,16 @@
+// Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
+import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { ContextMenuModule } from '@syncfusion/ej2-angular-navigations';
+// Services
+import { WeatherAPIService } from './services/weather-api.service';
+import { DayService, AgendaService, ICalendarImportService } from '@syncfusion/ej2-angular-schedule';
+// Components
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -12,11 +21,11 @@ import { WeatherComponent } from './components/weather/weather.component';
 import { GreetingsPageComponent } from './components/greetings-page/greetings-page.component';
 import { AlertComponent } from './components/alert';
 
-import { AppRoutingModule } from './app-routing/app-routing.module';
-import { WeatherAPIService } from './services/weather-api.service';
 import { AccountModule } from './account/account.module';
 import { AccountRoutingModule } from './account/account-routing.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { FoodDetailsComponent } from './components/food-details/food-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +37,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     OurGoalComponent,
     WeatherComponent,
     GreetingsPageComponent,
-    AlertComponent
+    AlertComponent,
+    CalendarComponent,
+    FoodDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,10 +47,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AccountRoutingModule,
     AppRoutingModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    // Calendar modules
+    ScheduleModule,
+    UploaderModule,
+    ButtonModule,
+    ContextMenuModule
   ],
   providers: [
-    WeatherAPIService
+    // Weather API services
+    WeatherAPIService,
+    // Calendar services
+    DayService,
+    AgendaService,
+    ICalendarImportService
   ],
   bootstrap: [AppComponent]
 })

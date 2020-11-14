@@ -1,1 +1,43 @@
 @import '~src/sass/variables';
+
+
+#item-weather {
+  grid-area: weather;
+  margin: 25px;
+  margin-right: 0;
+  z-index: 1;
+  position: relative;
+}
+
+#item-calendar {
+  grid-area: calendar;
+  overflow: hidden;
+  z-index: 1;
+  margin: -25px;
+  margin-right: -50px;
+  margin-top: -50px;
+  padding: 50px;
+  position: relative;
+}
+
+#item-details {
+  grid-area: details;
+  overflow: hidden;
+  margin: -25px;
+  margin-left: 0;
+  padding: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+#dashboard-container {
+  overflow: hidden;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 500px auto;
+  grid-template-rows: 250px auto;
+  grid-template-areas:
+        'weather  details'
+        'calendar details';
+}
