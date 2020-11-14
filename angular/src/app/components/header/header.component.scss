@@ -11,3 +11,29 @@
   height: 100%;
   width: 100%;
 }
+
+.topnav {
+  overflow: hidden;
+  background-color: $iHeaderBackgroundColor;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.topnav a {
+  float: right;
+  color: $iBackgroundBlack;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.topnav a:hover {
+  background-color: $iBackgroundBlueLight;
+  color: $iBackgroundBlack;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}

@@ -3,7 +3,6 @@ import { AccountService } from '../../services/account.service';
 import { Router } from '@angular/router';
 import { User } from '../../classes';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

@@ -26,6 +26,7 @@ import { AccountRoutingModule } from './account/account-routing.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { FoodDetailsComponent } from './components/food-details/food-details.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FoodDetailsComponent } from './components/food-details/food-details.com
     GreetingsPageComponent,
     AlertComponent,
     CalendarComponent,
-    FoodDetailsComponent
+    FoodDetailsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

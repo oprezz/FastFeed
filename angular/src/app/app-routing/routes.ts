@@ -6,6 +6,7 @@ import { OurGoalComponent } from '../components/our-goal/our-goal.component';
 import { LayoutComponent } from '../account/layout.component';
 import { LoginComponent } from '../account/login.component';
 import { RegisterComponent } from '../account/register.component';
+import { ProfileComponent } from '../components/profile/profile.component';
 
 
 export const routes: Routes = [
@@ -16,6 +17,10 @@ export const routes: Routes = [
  {
    path: 'goals',
    component: OurGoalComponent
+ },
+ {
+  path: 'profile',
+  component: ProfileComponent
  },
  {
    path: '',
