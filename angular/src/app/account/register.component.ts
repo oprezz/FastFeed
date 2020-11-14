@@ -7,7 +7,9 @@ import { first } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AccountService, AlertService } from '../services';
 
-@Component({ templateUrl: 'register.component.html' })
+@Component({ templateUrl: 'register.component.html', 
+    styleUrls: ['../../sass/_variables.scss']
+})
 export class RegisterComponent implements OnInit {
     form: FormGroup;
     loading = false;
