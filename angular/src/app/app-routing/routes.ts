@@ -19,7 +19,7 @@ export const routes: Routes = [
  },
  {
    path: '',
-   redirectTo: '/#',
+   redirectTo: '/greetings/register',
    pathMatch: 'full'
  }
 ];

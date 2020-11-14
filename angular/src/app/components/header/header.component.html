@@ -1,7 +1,9 @@
 <div class="my-header">
-  <a href="#">
+  <a (click)="onLogoClick()">
     <img src="/assets/fastfeed.png" style="height: 100%;" alt="" loading="lazy">
   </a>
-  <a class="btn" (click)="onLogout()" *ngIf="userLogged">Logout</a>
-  <button type="button" class="my-button">Profile</button>
+  <div *ngIf="user" style="float:right">
+    <a class="btn" (click)="onLogout()" >Logout</a>
+    <button type="button" class="my-button">Profile</button>
+  </div>
 </div>
