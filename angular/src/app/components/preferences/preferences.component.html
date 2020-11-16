@@ -1,0 +1,15 @@
+<div class="my-card-wrapper" style="margin-top: 10px;">
+    <div class="my-card-header">Preferences</div>
+    <div class="my-card-body">
+        Restaurant:
+        <mat-slider
+            class="example-margin"
+            [max]="max"
+            [min]="min"
+            [step]="step"
+            [thumbLabel]="thumbLabel"
+            [tickInterval]="getSliderTickInterval()"
+            [(ngModel)]="value">
+        </mat-slider>
+    </div>
+</div>
