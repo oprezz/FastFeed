@@ -1,18 +1,54 @@
 <div class="my-card-wrapper" style="margin-top: 10px;">
     <div class="my-card-header">Preferences</div>
-    <div class="my-card-body">
-        Restaurant:
-        <span class="text-small">{{min}}</span>
-        <mat-slider
-            class="example-margin"
-            [max]="max"
-            [min]="min"
-            [step]="step"
-            [thumbLabel]="thumbLabel"
-            [tickInterval]="getSliderTickInterval()"
-            [(ngModel)]="value"
-            style="outline:300px">
-        </mat-slider>
-        <span class="text-small">{{max}}</span>
+    <div class="my-card-body">        
+        <div class="form-group">
+            <span class="text-small">{{min}}</span>
+            <mat-slider
+                class="example-margin"
+                [max]="max"
+                [min]="min"
+                [step]="step"
+                [thumbLabel]="thumbLabel"
+                [tickInterval]="getSliderTickInterval()"
+                [(ngModel)]="value_restaurantorder"
+                style="outline:300px;">
+            </mat-slider>
+            <span class="text-small">{{max}}</span>
+        </div>
+        <p class="font-weight-light header-justify">Restaurant Order</p>
+        <div>
+            <span class="text-small">{{min}}</span>
+            <mat-slider
+                class="example-margin"
+                [max]="max"
+                [min]="min"
+                [step]="step"
+                [thumbLabel]="thumbLabel"
+                [tickInterval]="getSliderTickInterval()"
+                [(ngModel)]="value_cashcard"
+                style="outline:300px;">
+            </mat-slider>
+            <span class="text-small">{{max}}</span>
+        </div>   
+        <p class="font-weight-light header-justify">Cash Card</p>
+        <div>
+            <span class="text-small">{{min}}</span>
+            <mat-slider
+                class="example-margin"
+                [max]="max"
+                [min]="min"
+                [step]="step"
+                [thumbLabel]="thumbLabel"
+                [tickInterval]="getSliderTickInterval()"
+                [(ngModel)]="value_fastfoodfinedine"
+                style="outline:300px;">
+            </mat-slider>
+            <span class="text-small">{{max}}</span>
+        </div>     
+        <p class="font-weight-light header-justify">Fastfood Finedine</p>
+        
+        <button class="btn btn-success" id="basic" mat-button (click)="onSubmit()">
+            Save
+        </button>        
     </div>
 </div>

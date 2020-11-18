@@ -86,17 +86,19 @@ class UserService
 		return user;
 	}
 
-	static async update(_user)
+	static async updatePreferences(_user)
 	{
 		try {
-			await db.get().collection("users").replaceOne(
-				{ username : _user.username },
-				{ _user} ,
-				{ upsert: true }
-			);
+			const query = { username : _user.username };
+			const updateDocumentPref = {
+				$set: {"preferences": _user.preferences }
+			};
+			await db.get().collection("users").updateOne(query,updateDocumentPref);
+			return true;
 		}
 		catch (err) {
 			console.error(err);
+			return null;
 		}
 	}
 
@@ -127,6 +129,22 @@ class UserService
 			.then((users) => {
 				console.log('Users', users);
 		});
+	}
+
+	static createWithPreferences(user, userpreferences)
+	{
+		user = new UserModel(user.firstName, user.lastName, user.username, user.password, user.guid);
+		user.preferences.updatevalues(
+			userpreferences.restaurantPref, 
+			userpreferences.orderPref,
+			userpreferences.cashPref,
+			userpreferences.cardPref, 
+			userpreferences.fastfoodPref,
+			userpreferences.finedinePref,
+			userpreferences.specdiet,
+			userpreferences.allergies);
+
+		return user;
 	}
 }
 

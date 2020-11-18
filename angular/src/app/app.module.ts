@@ -8,10 +8,11 @@ import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { ContextMenuModule } from '@syncfusion/ej2-angular-navigations';
 import { MatSliderModule } from '@angular/material/slider';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DemoMaterialModule } from './material-module';
+
 
 // Services
 import { WeatherAPIService } from './services/weather-api.service';
@@ -65,6 +66,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     BrowserAnimationsModule,
     MatNativeDateModule,
     DemoMaterialModule,
+    ReactiveFormsModule,
     // Calendar modules
     ScheduleModule,
     UploaderModule,

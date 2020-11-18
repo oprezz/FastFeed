@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors')
 
 var generate_uid = require('./routes/generate_uid');
 var user = require('./routes/user');
@@ -33,6 +34,7 @@ process.on('unhandledRejection', function (reason, promise)
 
 var app = express();
 
+app.options('*', cors())
 
 db.connect(() => {
     app.listen(process.env.PORT || 5555, function (){
@@ -46,6 +48,7 @@ app.use(cookieParser())
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });

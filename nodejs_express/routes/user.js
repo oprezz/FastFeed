@@ -16,8 +16,7 @@ router.post('/register', async (req, res, next) =>
 	console.log('Post register invoked!');
 	console.log(body);
 	try
-	{
-		
+	{		
 		let user = await UserService.create(body);
 		if(body.guid != null)
 		{
@@ -60,12 +59,12 @@ router.post('/register', async (req, res, next) =>
 // });
 
 /* retrieves a customer by username */
-router.get('/user', async (req, res, next) =>
+router.get('/:username', async (req, res, next) =>
 {
 	try
 	{
 		// req.params.id
-		const user = await UserService.retrieve(req.query.username);
+		const user = await UserService.retrieve(req.param.username);
 		return res.json({user: user})
 	}
 	catch(err)
@@ -75,14 +74,17 @@ router.get('/user', async (req, res, next) =>
 	}
 });
 
-/* updates the user by uid */
-router.put('/username', async (req, res, next) =>
+/* updates the userpreferences by uid */
+router.put('/update', async (req, res, next) =>
 {
+	const body = req.body;
 	try
 	{
-		const user = await UserService.update(req.query.username, req.body);
+		let user = UserService.createWithPreferences(body, body.preferences);
+		console.log("User update requested! For user:", user.username);
+		await UserService.updatePreferences(user);
 
-		return res.json({ user: user });
+		return res.status(200).json({ user: user });
 	}
 	catch(err)
 	{

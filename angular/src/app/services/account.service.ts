@@ -28,6 +28,7 @@ export class AccountService {
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+                console.log("logged user:", user);
                 localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;
@@ -49,8 +50,8 @@ export class AccountService {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-    getById(guid: string) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${guid}`);
+    getById(username: string) {
+        return this.http.get<User>(`${environment.apiUrl}/users/${username}`);
     }
 
     update(guid, params) {
@@ -68,6 +69,23 @@ export class AccountService {
                 return x;
             }));
     }
+
+    updateuserdata(user : User) {
+        return this.http.put(`${environment.apiUrl}/users/update`, user)
+            .pipe(map(x => {
+                // update stored user if the logged in user updated their own record
+                if (user.guid == this.userValue.guid) {
+                    console.log("User update requested on front-end!");
+                    // update local storage
+                    localStorage.setItem('user', JSON.stringify(user));
+
+                    // publish updated user to subscribers
+                    this.userSubject.next(user);
+                }
+                return x;
+            }));
+    }
+    
 
     delete(guid: string) {
         return this.http.delete(`${environment.apiUrl}/users/${guid}`)
