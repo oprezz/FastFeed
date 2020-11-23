@@ -5,6 +5,7 @@ import { MatSliderChange } from '@angular/material/slider';
 import { AccountService, AlertService } from '../../services';
 import { first } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.component.html',
@@ -23,7 +24,10 @@ export class PreferencesComponent implements OnInit {
   tickInterval = 1;
   showTicks = true;
   thumbLabel = true;
-    
+  vegeterian = false;
+  vegan = false;
+  paleo = false;
+  
   constructor(
     private accountService: AccountService,
     private alertService: AlertService
@@ -61,6 +65,7 @@ export class PreferencesComponent implements OnInit {
   onSubmit() {
     this.SliderChanges();
     console.log("user", this.user);
+    console.log("vegeterian:", this.vegeterian);
     this.accountService.updateuserdata(this.user)
     .pipe(first())
     .subscribe({

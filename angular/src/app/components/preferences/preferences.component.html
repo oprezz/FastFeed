@@ -1,54 +1,81 @@
 <div class="my-card-wrapper" style="margin-top: 10px;">
     <div class="my-card-header">Preferences</div>
-    <div class="my-card-body">        
-        <div class="form-group">
-            <span class="text-small">{{min}}</span>
-            <mat-slider
-                class="example-margin"
-                [max]="max"
-                [min]="min"
-                [step]="step"
-                [thumbLabel]="thumbLabel"
-                [tickInterval]="getSliderTickInterval()"
-                [(ngModel)]="value_restaurantorder"
-                style="outline:300px;">
-            </mat-slider>
-            <span class="text-small">{{max}}</span>
+    <div class="my-card-body">
+        <div class="col-sm-6">
+            <ul class="pref-container-table">
+                <li class="font-weight-normal">General</li>
+                <li class="pref-container-table-li">
+                    <span class="text-small font-weight-light">In place</span>
+                    <mat-slider
+                        class="example-margin"
+                        [max]="max"
+                        [min]="min"
+                        [step]="step"
+                        [thumbLabel]="thumbLabel"
+                        [tickInterval]="getSliderTickInterval()"
+                        [(ngModel)]="value_restaurantorder"
+                        style="outline:300px;">
+                    </mat-slider>
+                    <span class="text-small font-weight-light">Takeaway</span>
+                </li>
+                <li class="pref-container-table-li">
+                    <span class="text-small font-weight-light">Cash</span>
+                    <mat-slider
+                        class="example-margin"
+                        [max]="max"
+                        [min]="min"
+                        [step]="step"
+                        [thumbLabel]="thumbLabel"
+                        [tickInterval]="getSliderTickInterval()"
+                        [(ngModel)]="value_cashcard"
+                        style="outline:300px;">
+                    </mat-slider>
+                    <span class="text-small font-weight-light">Card</span>
+                </li>
+                <li class="pref-container-table-li">
+                    <span class="text-small font-weight-light">Fastfood</span>
+                    <mat-slider
+                        class="example-margin"
+                        [max]="max"
+                        [min]="min"
+                        [step]="step"
+                        [thumbLabel]="thumbLabel"
+                        [tickInterval]="getSliderTickInterval()"
+                        [(ngModel)]="value_fastfoodfinedine"
+                        style="outline:300px;">
+                    </mat-slider>
+                    <span class="text-small font-weight-light">Finedine</span>
+                </li>
+                <li class="font-weight-normal">Diet</li>
+                <li class="pref-container-table-li">
+                    <div class="row">
+                        <div class="form-check" style="margin:6px">
+                            <input class="form-check-input" type="checkbox" value="" [(ngModel)]="vegeterian">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Vegetarian
+                            </label>
+                        </div>
+                        <div class="form-check" style="margin:6px">
+                            <input class="form-check-input" type="checkbox" value="" [(ngModel)]="vegan">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Vegan
+                            </label>
+                        </div>
+                        <div class="form-check" style="margin:6px">
+                            <input class="form-check-input" type="checkbox" value="" [(ngModel)]="paleo">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Paleo
+                            </label>
+                        </div>
+                    </div>
+                </li>
+            </ul> 
         </div>
-        <p class="font-weight-light header-justify">Restaurant Order</p>
-        <div>
-            <span class="text-small">{{min}}</span>
-            <mat-slider
-                class="example-margin"
-                [max]="max"
-                [min]="min"
-                [step]="step"
-                [thumbLabel]="thumbLabel"
-                [tickInterval]="getSliderTickInterval()"
-                [(ngModel)]="value_cashcard"
-                style="outline:300px;">
-            </mat-slider>
-            <span class="text-small">{{max}}</span>
-        </div>   
-        <p class="font-weight-light header-justify">Cash Card</p>
-        <div>
-            <span class="text-small">{{min}}</span>
-            <mat-slider
-                class="example-margin"
-                [max]="max"
-                [min]="min"
-                [step]="step"
-                [thumbLabel]="thumbLabel"
-                [tickInterval]="getSliderTickInterval()"
-                [(ngModel)]="value_fastfoodfinedine"
-                style="outline:300px;">
-            </mat-slider>
-            <span class="text-small">{{max}}</span>
-        </div>     
-        <p class="font-weight-light header-justify">Fastfood Finedine</p>
-        
-        <button class="btn btn-success" id="basic" mat-button (click)="onSubmit()">
-            Save
-        </button>        
+
+        <span class="pull-left pull-bottom">
+            <button class="btn btn-success" id="basic" mat-button (click)="onSubmit()">
+                Save
+            </button>
+        </span>       
     </div>
 </div>
