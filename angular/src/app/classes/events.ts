@@ -8,7 +8,20 @@ export class EventData {
   Location: string;
   CategoryColor: string;
   Other: string;
+
+  constructor(id, subject, startTime, endTime, eventType, location, categoryColor, other) {
+    this.Id = id;
+    this.Subject = subject;
+    this.StartTime = startTime;
+    this.EndTime = endTime;
+    this.EventType = eventType;
+    this.Location = location;
+    this.CategoryColor = categoryColor;
+    this.Other = other;
+  }
 }
+
+
 
 export let eventsData: EventData[] = [
   {

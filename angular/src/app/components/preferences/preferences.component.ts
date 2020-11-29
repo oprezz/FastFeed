@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../classes';
-import { UserPreferences } from '../../classes'
+import { UserPreferences } from '../../classes';
 import { MatSliderChange } from '@angular/material/slider';
 import { AccountService, AlertService } from '../../services';
 import { first } from 'rxjs/operators';
@@ -27,7 +27,7 @@ export class PreferencesComponent implements OnInit {
   vegeterian = false;
   vegan = false;
   paleo = false;
-  
+
   constructor(
     private accountService: AccountService,
     private alertService: AlertService
@@ -40,7 +40,7 @@ export class PreferencesComponent implements OnInit {
     }
     return 0;
   }
-  
+
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user')).user;
@@ -50,13 +50,13 @@ export class PreferencesComponent implements OnInit {
   }
 
   SliderChanges(): void {
-    console.log("changed!");
+    console.log('changed!');
     this.user.preferences.restaurantPref = this.value_restaurantorder;
     this.user.preferences.orderPref = this.max - this.value_restaurantorder;
-    
+
     this.user.preferences.cashPref = this.value_cashcard;
     this.user.preferences.cardPref = this.max - this.value_cashcard;
-    
+
     this.user.preferences.fastfoodPref = this.value_fastfoodfinedine;
     this.user.preferences.finedinePref = this.max - this.value_fastfoodfinedine;
     // localStorage.setItem('user', JSON.stringify(this.user));
@@ -64,8 +64,8 @@ export class PreferencesComponent implements OnInit {
 
   onSubmit() {
     this.SliderChanges();
-    console.log("user", this.user);
-    console.log("vegeterian:", this.vegeterian);
+    console.log('user', this.user);
+    console.log('vegeterian:', this.vegeterian);
     this.accountService.updateuserdata(this.user)
     .pipe(first())
     .subscribe({
@@ -75,6 +75,6 @@ export class PreferencesComponent implements OnInit {
         error: error => {
             this.alertService.error(error);
         }
-    });;
+    });
   }
 }

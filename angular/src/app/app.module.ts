@@ -17,6 +17,8 @@ import { DemoMaterialModule } from './material-module';
 // Services
 import { WeatherAPIService } from './services/weather-api.service';
 import { DayService, AgendaService, ICalendarImportService } from '@syncfusion/ej2-angular-schedule';
+import { AccountService, AlertService } from './services';
+import { CalendarService } from './services';
 // Components
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -56,7 +58,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
   ],
   imports: [
     BrowserModule,
-    AccountModule, 
+    AccountModule,
     AccountRoutingModule,
     AppRoutingModule,
     HttpClientModule,
@@ -81,7 +83,10 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     DayService,
     AgendaService,
     ICalendarImportService,
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' }}
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' }},
+    AccountService,
+    AlertService,
+    CalendarService
   ],
   bootstrap: [AppComponent]
 })
