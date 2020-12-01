@@ -25,12 +25,10 @@ export class ProfileComponent implements OnInit {
 
     user: User;
     calendar: Calendar;
-    ok;
 
     @ViewChild('scheduleObject')
     public scheduleObject: ScheduleComponent;
-    public btnImport = {browse: 'Choose file'};
-    private scheduleEvents: object[];
+    public btnImport = {browse: 'Upload calendar'};
 
     constructor(
         private accountService: AccountService,

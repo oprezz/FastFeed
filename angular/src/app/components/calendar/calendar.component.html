@@ -1,9 +1,11 @@
 <div class="my-card-wrapper">
-  <div class="my-card-header">Calendar</div>
-  <div class="my-card-body">
-    <ejs-schedule #scheduleObj width='100%' height='100%' [views]="scheduleViews" [selectedDate]="selectedDate"
-                  [currentView]="currentView" (eventClick)="onEventClick($event)" [eventSettings]="eventSettings">
-      <e-views><e-view option='Day'></e-view></e-views>
-    </ejs-schedule>
-  </div>
+    <div class="my-card-header">Calendar</div>
+    <div class="my-card-body">
+        <ejs-schedule #scheduleObj width='100%' height='100%' [views]="scheduleViews" [selectedDate]="selectedDate"
+                      [currentView]="currentView" (eventClick)="onEventClick($event)">
+            <e-views>
+                <e-view option='Day'></e-view>
+            </e-views>
+        </ejs-schedule>
+    </div>
 </div>

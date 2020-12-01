@@ -51,8 +51,7 @@ router.get('/:ownerGuid', async (req, res, next) =>
 {
     try
     {
-        // req.params.id
-        const calendar = await CalendarService.retrieve(req.param.OwnerGuid);
+        const calendar = await CalendarService.retrieve(req.params.ownerGuid);
         return res.json({calendar: calendar})
     }
     catch(err)
@@ -82,6 +81,7 @@ router.put('/update', async (req, res, next) =>
 /* removes the calendar from the calendar list by guid */
 router.delete('/ownerGuid', async (req, res, next) =>
 {
+    console.log("Deletion requested!")
     try
     {
         const calendar = await CalendarService.delete(req.query.OwnerGuid);

@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {first, map} from 'rxjs/operators';
 
 import {environment} from 'src/environments/environment';
 import {Calendar} from '../classes/calendar';
 import {ScheduleComponent} from '@syncfusion/ej2-angular-schedule';
 
+class Response{
+    public calendar: Calendar;
+}
 
 @Injectable({providedIn: 'root'})
 export class CalendarService {
-    private _CalendarSubject: BehaviorSubject<Calendar>;
-    public _Calendar: Observable<Calendar>;
 
     constructor(
         private router: Router,
@@ -25,22 +26,20 @@ export class CalendarService {
     public get calendarValue(): Calendar {
         return this._CalendarSubject.value;
     }
+    public _CalendarSubject: BehaviorSubject<Calendar>;
+    public _Calendar: Observable<Calendar>;
 
-    import(calendar: Calendar) {
+    import(calendar: Calendar): Observable<object> {
         return this.http.post(`${environment.apiUrl}/calendars/import`, calendar);
     }
 
-    getAll() {
+    getAll(): Observable<Calendar[]> {
         return this.http.get<Calendar[]>(`${environment.apiUrl}/calendars`);
     }
 
-    getEventsByGuid(ownerGuid: string) {
-        return this.http.get<Calendar>(`${environment.apiUrl}/calendars/${ownerGuid}`)
-            .pipe(map(calendar => {
-                console.log("Calendar returned:", calendar);
-                this._CalendarSubject.next(calendar);
-                return calendar;
-            }));
+    getEventsByGuid(ownerGuid: string): Observable<Response> {
+        return this.http.get<Response>(`${environment.apiUrl}/calendars/${ownerGuid}`, {observe: 'body', responseType: 'json'})
+            .pipe( map( data => data ) );
     }
 
     // update(guid, params) {
