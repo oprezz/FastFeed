@@ -47,6 +47,13 @@ $cardHeaderBackgroundColor: $iHeaderBackgroundColor;
 
 .my-button {
   @extend .btn;
-  @extend .btn-outline-dark;
-  float: right;
+  @extend .btn-outline-success;
+  //background-color: #14cc09; /* Green */
+  margin-right: 6px;
+  height: max;
+}
+
+.my-button-hover {
+  @extend .my-button;
+  background-color: #3e8e41;
 }

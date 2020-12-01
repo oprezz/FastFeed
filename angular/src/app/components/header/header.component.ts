@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
-
+import { Router } from '@angular/router';
+import { User } from '../../classes';
 
 @Component({
   selector: 'app-header',
@@ -9,24 +10,38 @@ import { AccountService } from '../../services/account.service';
 })
 export class HeaderComponent implements OnInit {
 
-  userLogged: boolean;
+  @Input() userLogged: boolean;
+
+  private homepage: string;
+
+  user: User;
 
   constructor(
-    private accountService: AccountService) 
+    private accountService : AccountService,
+    private router: Router) 
     {
-      if (localStorage.getItem("user")) {
-        this.userLogged = true;
-      } else {
-        this.userLogged = false;
-      }
+      this.accountService.user.subscribe(x => this.user = x);
     }
 
-    // TODO: ngDoCheck()
 
   onLogout(): void {
     this.accountService.logout();
   }
 
+  onGenerateAdvise(): void {
+    this.accountService.generateAdvise(this.user);
+  }
+  
   ngOnInit(): void {
+  }
+
+  onLogoClick(): void {
+    console.log("clicked! userlogged:", this.user);
+    if (this.user){
+      this.homepage = "/dashboard";
+    } else {
+      this.homepage = '/greetings/register';
+    }
+    this.router.navigate([this.homepage]);
   }
 }

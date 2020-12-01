@@ -8,6 +8,8 @@
 @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
 @import '../node_modules/@syncfusion/ej2-angular-schedule/styles/material.css';
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+
 
 html, body, #fullheight {
   min-height: 100% !important;
@@ -17,3 +19,6 @@ html, body, #fullheight {
   min-width: 100% !important;
   width: 100%;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

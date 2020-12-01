@@ -7,6 +7,10 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../classes';
 
+class UserResponse{
+    user: User;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     private userSubject: BehaviorSubject<User>;
@@ -25,12 +29,13 @@ export class AccountService {
     }
 
     login(username, password) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
+        return this.http.post<UserResponse>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
+                console.log("logged user:", user);
                 localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
+                this.userSubject.next(user.user);
+                return user.user;
             }));
     }
 
@@ -38,7 +43,7 @@ export class AccountService {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
         this.userSubject.next(null);
-        this.router.navigate(['/account/login']);
+        this.router.navigate(['/greetings/login']);
     }
 
     register(user: User) {
@@ -49,8 +54,8 @@ export class AccountService {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-    getById(guid: string) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${guid}`);
+    getById(username: string) {
+        return this.http.get<User>(`${environment.apiUrl}/users/${username}`);
     }
 
     update(guid, params) {
@@ -69,6 +74,27 @@ export class AccountService {
             }));
     }
 
+    updateuserdata(_user : User) {
+        return this.http.put<UserResponse>(`${environment.apiUrl}/users/update`, _user)
+            .pipe(map(x => {
+                // update stored user if the logged in user updated their own record
+                // console.log("x:", x);
+                console.log("user!", _user);
+                console.log("userValue!", this.userValue);
+                // console.log("userValueguid!", this.userValue.guid);
+                if (_user.guid === this.userValue.guid) {
+                    console.log("User update requested on front-end!");
+                    // update local storage
+                    localStorage.setItem('user', JSON.stringify(_user));
+
+                    // publish updated user to subscribers
+                    this.userSubject.next(_user);
+                }
+                return x.user;
+            }));
+    }
+    
+
     delete(guid: string) {
         return this.http.delete(`${environment.apiUrl}/users/${guid}`)
             .pipe(map(x => {
@@ -78,5 +104,9 @@ export class AccountService {
                 }
                 return x;
             }));
+    }
+
+    generateAdvise(user: User) {
+        return this.http.post(`${environment.apiUrl}/users/advise`, user)
     }
 }

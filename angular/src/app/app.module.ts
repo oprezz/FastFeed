@@ -7,6 +7,13 @@ import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { ContextMenuModule } from '@syncfusion/ej2-angular-navigations';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DemoMaterialModule } from './material-module';
+
+
 // Services
 import { WeatherAPIService } from './services/weather-api.service';
 import { DayService, AgendaService, ICalendarImportService } from '@syncfusion/ej2-angular-schedule';
@@ -26,6 +33,10 @@ import { AccountRoutingModule } from './account/account-routing.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { FoodDetailsComponent } from './components/food-details/food-details.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PreferencesComponent } from './components/preferences/preferences.component';
+
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -39,7 +50,9 @@ import { FoodDetailsComponent } from './components/food-details/food-details.com
     GreetingsPageComponent,
     AlertComponent,
     CalendarComponent,
-    FoodDetailsComponent
+    FoodDetailsComponent,
+    ProfileComponent,
+    PreferencesComponent
   ],
   imports: [
     BrowserModule,
@@ -48,19 +61,27 @@ import { FoodDetailsComponent } from './components/food-details/food-details.com
     AppRoutingModule,
     HttpClientModule,
     FlexLayoutModule,
+    MatSliderModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    DemoMaterialModule,
+    ReactiveFormsModule,
     // Calendar modules
     ScheduleModule,
     UploaderModule,
     ButtonModule,
     ContextMenuModule
   ],
+  entryComponents: [PreferencesComponent],
   providers: [
     // Weather API services
     WeatherAPIService,
     // Calendar services
     DayService,
     AgendaService,
-    ICalendarImportService
+    ICalendarImportService,
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' }}
   ],
   bootstrap: [AppComponent]
 })
