@@ -47,24 +47,47 @@
                     <span class="text-small font-weight-light">Finedine</span>
                 </li>
                 <li class="font-weight-normal">Diet</li>
-                <li class="pref-container-table-li">
+                <li class="pref-container-table-li" style="margin-left:30px">
                     <div class="row">
-                        <div class="form-check" style="margin:6px">
-                            <input class="form-check-input" type="checkbox" value="" [(ngModel)]="vegeterian">
+                        <div class="form-check" style="margin:6px; margin-left: 10px;">
+                            <input class="form-check-input" type="checkbox" value="" [(ngModel)]="vegetarian">
                             <label class="form-check-label" for="defaultCheck1">
                                 Vegetarian
                             </label>
                         </div>
-                        <div class="form-check" style="margin:6px">
+                        <div class="form-check" style="margin:6px; margin-left: 10px;">
                             <input class="form-check-input" type="checkbox" value="" [(ngModel)]="vegan">
                             <label class="form-check-label" for="defaultCheck1">
                                 Vegan
                             </label>
                         </div>
-                        <div class="form-check" style="margin:6px">
+                        <div class="form-check" style="margin:6px; margin-left: 10px;">
                             <input class="form-check-input" type="checkbox" value="" [(ngModel)]="paleo">
                             <label class="form-check-label" for="defaultCheck1">
                                 Paleo
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li class="font-weight-normal">Allergies</li>
+                <li class="pref-container-table-li" style="margin-left:30px">
+                    <div class="row">
+                        <div class="form-check" style="margin:6px; margin-left: 10px;">
+                            <input class="form-check-input" type="checkbox" value="" [(ngModel)]="lactose">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Lactose
+                            </label>
+                        </div>
+                        <div class="form-check" style="margin:6px; margin-left: 10px;">
+                            <input class="form-check-input" type="checkbox" value="" [(ngModel)]="gluten">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Gluten
+                            </label>
+                        </div>
+                        <div class="form-check" style="margin:6px; margin-left: 10px;">
+                            <input class="form-check-input" type="checkbox" value="" [(ngModel)]="nuts">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Nuts
                             </label>
                         </div>
                     </div>

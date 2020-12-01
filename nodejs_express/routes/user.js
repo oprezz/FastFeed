@@ -17,17 +17,17 @@ router.post('/register', async (req, res, next) =>
 	console.log(body);
 	try
 	{		
-		let user = await UserService.create(body);
+		let _user = await UserService.create(body);
 		if(body.guid != null)
 		{
-			user.guid = body.guid;
+			_user.guid = body.guid;
 		}
 
-		res.cookie('guid', user.guid, { maxAge: 900000, httpOnly: true });
-		user = await UserService.updateGuid(user.username, user.guid);
+		res.cookie('guid', _user.guid, { maxAge: 900000, httpOnly: true });
+		_user = await UserService.updateGuid(_user.username, _user.guid);
 
 		// created the user! 
-		return res.status(201).json({ user: user });
+		return res.status(201).json({ user: _user });
 	}
 	catch(err)
 	{
@@ -80,11 +80,11 @@ router.put('/update', async (req, res, next) =>
 	const body = req.body;
 	try
 	{
-		let user = UserService.createWithPreferences(body, body.preferences);
-		console.log("User update requested! For user:", user.username);
-		await UserService.updatePreferences(user);
-
-		return res.status(200).json({ user: user });
+		let _user = UserService.createModel(body);
+		console.log("User update requested! For user:", _user.username);
+		await UserService.updatePreferences(_user);
+		console.log("User update requested! For user:", _user);
+		return res.status(200).json({ user: _user });
 	}
 	catch(err)
 	{
@@ -115,15 +115,15 @@ router.post('/authenticate', async (req, res, next) =>
 	const body = req.body;
 	try
 	{
-		const user = await UserService.login(body.username, body.password);
-		console.log("Login requested for user:", user);
+		const _user = await UserService.login(body.username, body.password);
+		console.log("Login requested for user:", _user);
 
-		if (user.guid != null)
+		if (_user.guid != null)
 		{
-			res.cookie('guid', user.guid, { maxAge: 900000, httpOnly: true });
+			res.cookie('guid', _user.guid, { maxAge: 900000, httpOnly: true });
 
 			// created the user! 
-			return res.status(200).json({ user: user });
+			return res.status(200).json({ user: _user });
 		}
 		else
 		{

@@ -24,14 +24,20 @@ export class PreferencesComponent implements OnInit {
   tickInterval = 1;
   showTicks = true;
   thumbLabel = true;
-  vegeterian = false;
+  vegetarian = false;
   vegan = false;
   paleo = false;
+  lactose = false;
+  gluten = false;
+  nuts = false;
   
   constructor(
     private accountService: AccountService,
     private alertService: AlertService
-  ) { }
+  ) { 
+    this.accountService.user.subscribe(x => this.user = x);
+    console.log("preferences user:", this.user);
+  }
 
 
   getSliderTickInterval(): number | 'auto' {
@@ -43,10 +49,20 @@ export class PreferencesComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user')).user;
+    // this.user = JSON.parse(localStorage.getItem('user')).user;
+    this.loadUserParams();
+  }
+
+  loadUserParams(): void{
     this.value_restaurantorder = this.user.preferences.restaurantPref;
     this.value_cashcard = this.user.preferences.cashPref;
     this.value_fastfoodfinedine = this.user.preferences.fastfoodPref;
+    this.vegetarian = this.user.preferences.specdiet.vegetarian;
+    this.vegan = this.user.preferences.specdiet.vegan;
+    this.paleo = this.user.preferences.specdiet.paleo;
+    this.lactose = this.user.preferences.allergies.lactose;
+    this.gluten = this.user.preferences.allergies.gluten;
+    this.nuts = this.user.preferences.allergies.nuts;
   }
 
   SliderChanges(): void {
@@ -61,13 +77,23 @@ export class PreferencesComponent implements OnInit {
     this.user.preferences.finedinePref = this.max - this.value_fastfoodfinedine;
     // localStorage.setItem('user', JSON.stringify(this.user));
   }
+  
+  CheckBoxChanges(): void
+  {
+    this.user.preferences.allergies.gluten = this.gluten;
+    this.user.preferences.allergies.lactose = this.lactose;
+    this.user.preferences.allergies.nuts = this.nuts;
+    
+    this.user.preferences.specdiet.paleo = this.paleo;
+    this.user.preferences.specdiet.vegan = this.vegan;
+    this.user.preferences.specdiet.vegetarian = this.vegetarian;    
+  }
 
   onSubmit() {
     this.SliderChanges();
-    console.log("user", this.user);
-    console.log("vegeterian:", this.vegeterian);
+    this.CheckBoxChanges();
+    console.log("GUI user", this.user);
     this.accountService.updateuserdata(this.user)
-    .pipe(first())
     .subscribe({
         next: () => {
             this.alertService.success('Saved successfully', { keepAfterRouteChange: true });

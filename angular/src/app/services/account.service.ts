@@ -7,6 +7,10 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../classes';
 
+class UserResponse{
+    user: User;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     private userSubject: BehaviorSubject<User>;
@@ -25,13 +29,13 @@ export class AccountService {
     }
 
     login(username, password) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
+        return this.http.post<UserResponse>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 console.log("logged user:", user);
                 localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
+                this.userSubject.next(user.user);
+                return user.user;
             }));
     }
 
@@ -70,19 +74,23 @@ export class AccountService {
             }));
     }
 
-    updateuserdata(user : User) {
-        return this.http.put(`${environment.apiUrl}/users/update`, user)
+    updateuserdata(_user : User) {
+        return this.http.put<UserResponse>(`${environment.apiUrl}/users/update`, _user)
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
-                if (user.guid == this.userValue.guid) {
+                // console.log("x:", x);
+                console.log("user!", _user);
+                console.log("userValue!", this.userValue);
+                // console.log("userValueguid!", this.userValue.guid);
+                if (_user.guid === this.userValue.guid) {
                     console.log("User update requested on front-end!");
                     // update local storage
-                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('user', JSON.stringify(_user));
 
                     // publish updated user to subscribers
-                    this.userSubject.next(user);
+                    this.userSubject.next(_user);
                 }
-                return x;
+                return x.user;
             }));
     }
     
@@ -96,5 +104,9 @@ export class AccountService {
                 }
                 return x;
             }));
+    }
+
+    generateAdvise(user: User) {
+        return this.http.post(`${environment.apiUrl}/users/advise`, user)
     }
 }

@@ -28,6 +28,10 @@ export class HeaderComponent implements OnInit {
     this.accountService.logout();
   }
 
+  onGenerateAdvise(): void {
+    this.accountService.generateAdvise(this.user);
+  }
+  
   ngOnInit(): void {
   }
 
