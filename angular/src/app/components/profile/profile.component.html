@@ -1,13 +1,13 @@
-<div class="container-fluid" style="height: 100%; overflow: hidden;">
-    <div class="row" style="height: 100%;">
-        <div class="col-sm-4" style="height: 100%; width: 100%;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
             <div class="col-sm" style="max-width: 300px;">
                 <img src="/assets/empty_profile_pic.png" class="profile-pic" alt="" loading="lazy">
             </div>
             <div class="col-sm" style="max-width: 400px;">
                 <div class="my-card-wrapper" style="margin-top: 10px;">
                     <div class="my-card-header">User info</div>
-                    <div class="my-card-body" style="overflow-x: hidden;">
+                    <div class="my-card-body">
                         <p class="font-weight-normal">username: {{user.username}}</p>
                         <p class="font-weight-normal">first name: {{user.firstName}}</p>
                         <p class="font-weight-normal">last name: {{user.lastName}}</p>
@@ -23,8 +23,7 @@
             </div>
         </div>
         <!-- preferences -->
-        <div class="col-xl-8" style="height: 100%; width: 100%; overflow: auto; padding-bottom: 20px; padding-top: 20px;
-                                      padding-left: 60px;">
+        <div class="col-xl-8">
             <app-preferences></app-preferences>
         </div>
     </div>

@@ -1,3 +1,9 @@
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../classes';
+import { AccountService, AlertService } from '../../services';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import 'rxjs/add/observable/of';
@@ -23,23 +29,25 @@ import {PromiseType} from 'protractor/built/plugins';
 })
 export class ProfileComponent implements OnInit {
 
-    user: User;
-    calendar: Calendar;
+  user: User;
+  selectedFile: File = null;
+  calendar: Calendar;
 
-    @ViewChild('scheduleObject')
-    public scheduleObject: ScheduleComponent;
-    public btnImport = {browse: 'Upload calendar'};
+  @ViewChild('scheduleObject')
+  public scheduleObject: ScheduleComponent;
+  public btnImport = {browse: 'Upload calendar'};
 
-    constructor(
-        private accountService: AccountService,
-        private alertService: AlertService,
-        private calendarService: CalendarService
+  constructor(
+    private accountService: AccountService,
+    private http: HttpClient,
+    private alertService: AlertService,
+    private calendarService: CalendarService
     ) {
+      this.accountService.user.subscribe(x => this.user = x);
+      console.log("profile user:", this.user);
     }
 
-    ngOnInit(): void {
-        this.user = JSON.parse(localStorage.getItem('user')).user;
-    }
+    ngOnInit(): void {}
 
     public sleep(ms): void{
         const date = Date.now();

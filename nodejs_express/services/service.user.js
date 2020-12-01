@@ -93,7 +93,7 @@ class UserService
 			const updateDocumentPref = {
 				$set: {"preferences": _user.preferences }
 			};
-			await db.get().collection("users").updateOne(query,updateDocumentPref);
+			await db.get().collection("users").updateOne(query, updateDocumentPref);
 			return true;
 		}
 		catch (err) {
@@ -134,7 +134,7 @@ class UserService
 	static createWithPreferences(user, userpreferences)
 	{
 		user = new UserModel(user.firstName, user.lastName, user.username, user.password, user.guid);
-		user.preferences.updatevalues(
+		user.preferences.updateValues(
 			userpreferences.restaurantPref, 
 			userpreferences.orderPref,
 			userpreferences.cashPref,
@@ -144,6 +144,14 @@ class UserService
 			userpreferences.specdiet,
 			userpreferences.allergies);
 
+		return user;
+	}
+
+	static createModel(_user)
+	{
+		console.log(_user);
+		let user = new UserModel(_user.firstName, _user.lastName, _user.username, _user.password, _user.guid);
+		user.updateValues(_user);
 		return user;
 	}
 }
