@@ -35,7 +35,10 @@ export class PreferencesComponent implements OnInit {
     private accountService: AccountService,
     private alertService: AlertService
   ) {
-    this.accountService.user.subscribe(x => this.user = x);
+    this.accountService.user.subscribe(x => {
+        this.user = x;
+        this.loadUserParams();
+    });
     console.log("preferences user:", this.user);
   }
 
@@ -50,7 +53,6 @@ export class PreferencesComponent implements OnInit {
 
   ngOnInit(): void {
     // this.user = JSON.parse(localStorage.getItem('user')).user;
-    this.loadUserParams();
   }
 
   loadUserParams(): void{

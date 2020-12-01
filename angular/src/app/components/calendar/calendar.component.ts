@@ -30,8 +30,14 @@ export class CalendarComponent implements OnInit, AfterViewInit{
 
     @Output() sendDetailsEmitter = new EventEmitter();
 
-    constructor(private calendarService: CalendarService) {
-        this.user = JSON.parse(localStorage.getItem('user')).user;
+    constructor(private accountService: AccountService, private calendarService: CalendarService) {
+        this.accountService.user.subscribe(user => {
+           this.user = user;
+           this.callForCalendar();
+        });
+    }
+
+    callForCalendar(): void{
         this.calendarService.getEventsByGuid(this.user.guid)
             .subscribe(response => this.scheduleObj.eventSettings.dataSource = response.calendar.EventArray);
     }

@@ -13,11 +13,9 @@ export class AppComponent {
   title = 'angular';
 
   user: User;
-  calendar: Calendar;
 
-  constructor(private accountService: AccountService, private calendarService: CalendarService) {
+  constructor(private accountService: AccountService) {
     this.accountService.user.subscribe(x => this.user = x);
-    this.calendarService._Calendar.subscribe(x => this.calendar = x);
   }
 
   logout () {

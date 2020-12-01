@@ -1,26 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+
 import { User } from '../../classes';
 import { AccountService, AlertService } from '../../services';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
 import 'rxjs/add/observable/of';
 
-import {User} from '../../classes';
 import {Calendar} from '../../classes/calendar';
-import {AccountService, AlertService} from '../../services';
-import {CalendarService} from '../../services/calendar.service';
+import {CalendarService} from '../../services';
 import {SelectedEventArgs} from '@syncfusion/ej2-inputs';
-import {ScheduleComponent, EventSettingsModel} from '@syncfusion/ej2-angular-schedule';
-import {DataManager, Query, JsonAdaptor} from '@syncfusion/ej2-data';
-import {compile} from '@syncfusion/ej2-base';
+import {ScheduleComponent} from '@syncfusion/ej2-angular-schedule';
 import {first} from 'rxjs/operators';
-import {EventData, eventsData} from '../../classes/events';
-import {Console} from 'inspector';
-import * as EventS from 'events';
-import {PromiseType} from 'protractor/built/plugins';
 
 @Component({
     selector: 'app-profile',
@@ -61,7 +51,7 @@ export class ProfileComponent implements OnInit {
         this.calendarService.import(new Calendar(this.user.guid, eventArray)).pipe(first())
             .subscribe({
                 next: () => {
-                    this.alertService.success('Registration successful', { keepAfterRouteChange: true });;
+                    this.alertService.success('Registration successful', { keepAfterRouteChange: true });
                 },
                 error: error => {
                     this.alertService.error(error);

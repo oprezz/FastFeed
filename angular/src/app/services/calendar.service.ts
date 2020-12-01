@@ -2,11 +2,10 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {first, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 import {environment} from 'src/environments/environment';
 import {Calendar} from '../classes/calendar';
-import {ScheduleComponent} from '@syncfusion/ej2-angular-schedule';
 
 class Response{
     public calendar: Calendar;
@@ -18,16 +17,7 @@ export class CalendarService {
     constructor(
         private router: Router,
         private http: HttpClient
-    ) {
-        this._CalendarSubject = new BehaviorSubject<Calendar>(JSON.parse(localStorage.getItem('calendar')));
-        this._Calendar = this._CalendarSubject.asObservable();
-    }
-
-    public get calendarValue(): Calendar {
-        return this._CalendarSubject.value;
-    }
-    public _CalendarSubject: BehaviorSubject<Calendar>;
-    public _Calendar: Observable<Calendar>;
+    ) {}
 
     import(calendar: Calendar): Observable<object> {
         return this.http.post(`${environment.apiUrl}/calendars/import`, calendar);
