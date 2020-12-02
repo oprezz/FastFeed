@@ -3,22 +3,8 @@ const FoodModel = require("../models/model.food.js");
 let Validator = require('fastest-validator');
 var db = require('../bin/db.js')
 
-let foods = {};
-let foodCounter = 0;
-
-/* create an instance of the validator */
-let foodValidator = new Validator();
-
-/* food validator shema */
-const foodVSchema = {
-    name: { type: "string", min: 3 },
-    place: { type: "string", min: 3 },
-    allergens: { type: "array" },
-    diet: { type: "array" },
-    category: { type: "string" },
-    order: { type: "bool" },
-    img: { type: "string" }
-};
+// let foods = {};
+// let foodCounter = 0;
 
 /* static user service class */
 class FoodService
@@ -54,6 +40,18 @@ class FoodService
     {
         try{
             await db.get().collection("foods").remove({name : name});
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
+
+    static async getAll()
+    {
+        try{
+            const foods = await db.get().collection("foods").find({}).toArray();
+            // console.log("getall foods:", foods);
+            return foods;
         }
         catch (err) {
             console.error(err);

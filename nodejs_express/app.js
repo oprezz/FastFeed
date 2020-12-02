@@ -47,7 +47,7 @@ db.connect(() => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -58,8 +58,8 @@ app.use(function(req, res, next) {
 
 app.use('/users', user);
 app.use('/user/generate_uid', generate_uid);
-app.use('/calendars', calendar)
-app.use('/foods', food)
-app.use('/recommend', recommend)
+app.use('/calendars', calendar);
+app.use('/foods', food);
+app.use('/recommend', recommend);
 
 module.exports = app;

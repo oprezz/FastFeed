@@ -107,6 +107,7 @@ export class AccountService {
     }
 
     generateAdvise(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/advise`, user)
+        console.log("generation req");
+        return this.http.post(`${environment.apiUrl}/recommend/food`, user);
     }
 }

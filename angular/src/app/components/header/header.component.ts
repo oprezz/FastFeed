@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { Router } from '@angular/router';
 import { User } from '../../classes';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +30,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onGenerateAdvise(): void {
-    this.accountService.generateAdvise(this.user);
+    this.accountService.generateAdvise(this.user)
+      .subscribe( x => console.log("front end received", x)
+    );
   }
   
   ngOnInit(): void {

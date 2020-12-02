@@ -6,6 +6,8 @@ var db = require('../bin/db.js');
 const Allergies = require('../models/user.allergies');
 const SpecDiet = require('../models/user.specdiet');
 const FoodModel = require("../models/model.food.js");
+const UserService = require('../services/service.user');
+const RecommendationService = require('../services/service.recommend');
 
 /* adds a new user to the list */
 router.post('/food', async (req, res, next) =>
@@ -14,7 +16,12 @@ router.post('/food', async (req, res, next) =>
     // lekérni az összes kaját is
     // meghívni egy fv-t ami ajánl egyet
     // Food-dal visszatérni
-    // const food = RecommendService.recommendFood(user, allfoods);
+    console.log("server side food gen req");
+    const allfoods = await FoodService.getAll();
+    // const user = await UserService.retrieve(username);
+    const food = RecommendationService.recommendFood(user, allfoods);
     
-    return res.status(201).json({ food: food });
+    return res.status(201).json({ foods: food });
 });
+
+module.exports = router;
