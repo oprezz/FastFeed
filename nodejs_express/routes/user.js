@@ -142,6 +142,7 @@ router.post('/authenticate', async (req, res, next) =>
 	}
 });
 
+
 router.get('/users', (req, res) => {
 	UserService.getAll();
 	return;

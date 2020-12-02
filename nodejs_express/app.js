@@ -7,6 +7,8 @@ var cors = require('cors')
 var generate_uid = require('./routes/generate_uid');
 var user = require('./routes/user');
 var calendar = require('./routes/calendar')
+var food = require('./routes/food')
+var recommend = require('./routes/recommend')
 var db = require('./bin/db.js')
 
 let reporter = function (type, ...rest)
@@ -57,5 +59,7 @@ app.use(function(req, res, next) {
 app.use('/users', user);
 app.use('/user/generate_uid', generate_uid);
 app.use('/calendars', calendar)
+app.use('/foods', food)
+app.use('/recommend', recommend)
 
 module.exports = app;
