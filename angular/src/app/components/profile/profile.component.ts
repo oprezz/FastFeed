@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit {
     private calendarService: CalendarService
     ) {
       this.accountService.user.subscribe(x => this.user = x);
-      console.log("profile user:", this.user);
     }
 
     ngOnInit(): void {}

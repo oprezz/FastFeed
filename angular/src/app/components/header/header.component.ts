@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogoClick(): void {
-    console.log("clicked! userlogged:", this.user);
     if (this.user){
       this.homepage = "/dashboard";
     } else {

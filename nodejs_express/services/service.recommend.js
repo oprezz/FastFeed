@@ -14,11 +14,11 @@ class RecommendationService {
         var foodWithCorrectDiet = allfood.filter(function(allfoodObj) {
             // check for user diets
             console.log("user in fn", user);
-            if ((user.preferences.specdiet.paleo === true) && (allfoodObj.specdiet.paleo === false)) //!user.specdiet.paleo - the user can not consume this food, return false
+            if ((user.preferences.specdiet.paleo === true) && (allfoodObj.specdiet.paleo === false)) // the user can not consume this food, return false
                 return false;
-            if ((user.preferences.specdiet.vegetarian === true) && (allfoodObj.specdiet.vegetarian === false)) //!user.specdiet.vegetarian - the user can not consume this food, return false
+            if ((user.preferences.specdiet.vegetarian === true) && (allfoodObj.specdiet.vegetarian === false))
                 return false;
-            if ((user.preferences.specdiet.vegan === true) && (allfoodObj.specdiet.vegan === false)) //!user.specdiet.vegan - the user can not consume this food, return false
+            if ((user.preferences.specdiet.vegan === true) && (allfoodObj.specdiet.vegan === false)) 
                 return false;
             return true;
         });

@@ -114,12 +114,20 @@ class UserService
 	
 	static async login(_username, _password){
 		const user = await UserService.retrieve(_username);
-		if (user.password == _password){
-			console.log("User PW correct!")
-			return user;
+		let error;
+		if (user === null)
+		{
+			error = "Unknown username!";
+			return {user: user, error: error};
+		}
+		else if (user.password == _password){
+			console.log("User PW correct!");
+			error = null;
+			return {user: user, error: error};
 		} else { 
-			console.log("User PW incorrect!") // TODO inform user
-			return null;
+			console.log("User PW incorrect!"); // TODO inform user
+			error = "Incorrect password!";
+			return {user: null, error: error};
 		}
 	}
 

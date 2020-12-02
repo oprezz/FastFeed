@@ -31,7 +31,6 @@ router.post('/register', async (req, res, next) =>
 	}
 	catch(err)
 	{
-		console.log('5');
 		if (err.name === 'ValidationError')
 		{
         	return res.status(400).json({ error: err.message });
@@ -81,9 +80,7 @@ router.put('/update', async (req, res, next) =>
 	try
 	{
 		let _user = UserService.createModel(body);
-		console.log("User update requested! For user:", _user.username);
 		await UserService.updatePreferences(_user);
-		console.log("User update requested! For user:", _user);
 		return res.status(200).json({ user: _user });
 	}
 	catch(err)
@@ -115,19 +112,19 @@ router.post('/authenticate', async (req, res, next) =>
 	const body = req.body;
 	try
 	{
-		const _user = await UserService.login(body.username, body.password);
+		const {user: _user, error: _error} = await UserService.login(body.username, body.password);
 		console.log("Login requested for user:", _user);
 
+		if (_user == null)
+		{
+			return res.status(400).json({error: _error});
+		}
 		if (_user.guid != null)
 		{
 			res.cookie('guid', _user.guid, { maxAge: 900000, httpOnly: true });
 
 			// created the user! 
 			return res.status(200).json({ user: _user });
-		}
-		else
-		{
-			return res.status(400).json({error: "Password is not correct"});
 		}
 	}
 	catch(err)

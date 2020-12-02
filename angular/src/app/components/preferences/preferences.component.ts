@@ -39,7 +39,6 @@ export class PreferencesComponent implements OnInit {
         this.user = x;
         this.loadUserParams();
     });
-    console.log("preferences user:", this.user);
   }
 
 
@@ -94,11 +93,10 @@ export class PreferencesComponent implements OnInit {
   onSubmit() {
     this.SliderChanges();
     this.CheckBoxChanges();
-    console.log("GUI user", this.user);
     this.accountService.updateuserdata(this.user)
     .subscribe({
         next: () => {
-            this.alertService.success('Saved successfully', { keepAfterRouteChange: true });
+            this.alertService.success('Saved successfully!', { keepAfterRouteChange: true });
         },
         error: error => {
             this.alertService.error(error);
