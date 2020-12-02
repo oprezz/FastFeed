@@ -29,6 +29,9 @@ import { OurGoalComponent } from './components/our-goal/our-goal.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { GreetingsPageComponent } from './components/greetings-page/greetings-page.component';
 import { AlertComponent } from './components/alert';
+import { BusinessComponent } from './components/business/business.component';
+import { CarrierComponent } from './components/carrier/carrier.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 import { AccountModule } from './account/account.module';
 import { AccountRoutingModule } from './account/account-routing.module'
@@ -39,6 +42,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PreferencesComponent } from './components/preferences/preferences.component';
 
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +58,10 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     CalendarComponent,
     FoodDetailsComponent,
     ProfileComponent,
-    PreferencesComponent
+    PreferencesComponent,
+    BusinessComponent,
+    CarrierComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
