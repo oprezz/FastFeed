@@ -9,6 +9,7 @@ export class UserPreferences {
     cardPref: number;
     fastfoodPref: number;
     finedinePref: number;
+    coffee: boolean;
     specdiet: SpecialDiet;
     allergies: Allergies;
 }

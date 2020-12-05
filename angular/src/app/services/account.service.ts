@@ -100,7 +100,7 @@ export class AccountService {
             }));
     }
 
-    generateAdvise(user: User) {
+    generateFoodAdvise(user: User) {
         return this.http.post(`${environment.apiUrl}/recommend/food`, user);
     }
 }

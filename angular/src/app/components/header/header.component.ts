@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onGenerateAdvise(): void {
-    this.accountService.generateAdvise(this.user)
+    this.accountService.generateFoodAdvise(this.user)
       .subscribe( x => console.log("front end received", x)
     );
   }

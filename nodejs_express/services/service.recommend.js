@@ -12,8 +12,7 @@ const FoodModel = require("../models/model.food.js");
 class RecommendationService {
     static recommendFood(user, allfood){
         var foodWithCorrectDiet = allfood.filter(function(allfoodObj) {
-            // check for user diets
-            console.log("user in fn", user);
+        console.log("Food recommendation service invoked!");
             if ((user.preferences.specdiet.paleo === true) && (allfoodObj.specdiet.paleo === false)) // the user can not consume this food, return false
                 return false;
             if ((user.preferences.specdiet.vegetarian === true) && (allfoodObj.specdiet.vegetarian === false))
@@ -23,7 +22,7 @@ class RecommendationService {
             return true;
         });
 
-        console.log("foodWithCorrectDiet", foodWithCorrectDiet);
+        // console.log("foodWithCorrectDiet", foodWithCorrectDiet);
         var foodWithoutAllergens = foodWithCorrectDiet.filter(function(foods) {
             if ((user.preferences.allergies.lactose === true) && (foods.allergens.lactose === true)) // user is allergic to lactose, AND the food contains -> sort it out
                 return false;
@@ -33,8 +32,17 @@ class RecommendationService {
                 return false;
             return true;                
         });
-        console.log("foodWithoutAllergens", foodWithoutAllergens);
+        // console.log("foodWithoutAllergens", foodWithoutAllergens);
         return foodWithoutAllergens[0];
+    }
+
+    static recommendCoffee(user, coffee)
+    {
+        console.log("Coffee recommendation service invoked!");
+        if(user.preferences.coffee == false)
+            return null;
+        var rnd = Math.floor(Math.random() * coffee.length);
+        return coffee[rnd];        
     }
 }
 module.exports = RecommendationService;

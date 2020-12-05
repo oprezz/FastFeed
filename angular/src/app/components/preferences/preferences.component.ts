@@ -30,7 +30,8 @@ export class PreferencesComponent implements OnInit {
   lactose = false;
   gluten = false;
   nuts = false;
-
+  coffee = false;
+  
   constructor(
     private accountService: AccountService,
     private alertService: AlertService
@@ -64,6 +65,7 @@ export class PreferencesComponent implements OnInit {
     this.lactose = this.user.preferences.allergies.lactose;
     this.gluten = this.user.preferences.allergies.gluten;
     this.nuts = this.user.preferences.allergies.nuts;
+    this.coffee = this.user.preferences.coffee;
   }
 
   SliderChanges(): void {
@@ -76,6 +78,7 @@ export class PreferencesComponent implements OnInit {
 
     this.user.preferences.fastfoodPref = this.value_fastfoodfinedine;
     this.user.preferences.finedinePref = this.max - this.value_fastfoodfinedine;
+    this.user.preferences.coffee = this.coffee;
     // localStorage.setItem('user', JSON.stringify(this.user));
   }
 
@@ -93,6 +96,8 @@ export class PreferencesComponent implements OnInit {
   onSubmit() {
     this.SliderChanges();
     this.CheckBoxChanges();
+    console.log(this.coffee);
+    console.log("user__:", this.user);
     this.accountService.updateuserdata(this.user)
     .subscribe({
         next: () => {

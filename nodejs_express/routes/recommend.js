@@ -18,10 +18,12 @@ router.post('/food', async (req, res, next) =>
     // Food-dal visszatérni
     console.log("server side food gen req");
     const allfoods = await FoodService.getAll();
+    const coffees = await FoodService.getAllCoffee();
     // const user = await UserService.retrieve(username);
     const food = RecommendationService.recommendFood(user, allfoods);
-    
-    return res.status(201).json({ foods: food });
+    const coffee = RecommendationService.recommendCoffee(user, coffees);
+    console.log("coffee:", coffee);
+    return res.status(201).json({ foods: food , coffee: coffee});
 });
 
 module.exports = router;
