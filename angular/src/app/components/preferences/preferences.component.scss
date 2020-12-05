@@ -76,3 +76,47 @@
 .example-checkbox {
   margin: 0 10px;
 }
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color:  $iBackgroundBlueLight; /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: $iBackgroundBGreenDark;  /*replace with your color*/
+}
+
+::ng-deep  .mat-slide-toggle-bar{
+    background-color: gray;
+}
+
+
+.block-border {
+    border-style: groove;
+    border-width: 1px;
+    border-color: $iBackgroundBGreenDark;
+    margin:20px;
+    padding:12px
+}
+
+.my-card-wrapper-pref {
+    @extend .my-card-wrapper;
+    border: 0px solid $iBackgroundGreyDark;
+    box-shadow:
+      0 1.8px 1.2px rgba(0, 0, 0, 0.034),
+      0 4.7px 3.3px rgba(0, 0, 0, 0.048),
+      0 8.5px 6px rgba(0, 0, 0, 0.06),
+      0 12.3px 10.9px rgba(0, 0, 0, 0.072),
+      0 20.8px 20.4px rgba(0, 0, 0, 0.086),
+      0 50px 40px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .my-card-header-pref {
+    @extend .my-card-header;
+    font-size: 18px;
+    line-height: 1;
+    background-color: $cardHeaderBackgroundColor;
+  }

@@ -57,6 +57,19 @@ class FoodService
             console.error(err);
         }
     }
-}
+    
+    static async getAllCoffee()
+    {
+        try{
+            const coffee = await db.get().collection("coffee").find({}).toArray();
+            // console.log("getall coffee:", coffee);
+            return coffee;
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
 
+
+}
 module.exports = FoodService;

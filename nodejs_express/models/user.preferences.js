@@ -9,6 +9,7 @@ class UserPreferences
     cardPref;
     fastfoodPref;
     finedinePref;
+    coffee;
     specdiet;
     allergies;
 
@@ -20,11 +21,12 @@ class UserPreferences
         this.cardPref = 5;
         this.fastfoodPref = 5;
         this.finedinePref = 5;
+        this.coffee = false;
 		this.specdiet = new SpecDiet();
 		this.allergies = new Allergies();
     }
 
-	updatevalues(restaurantPref, orderPref, cashPref, cardPref, fastfoodPref, finedinePref, specdiet, allergies)
+	updatevalues(restaurantPref, orderPref, cashPref, cardPref, fastfoodPref, finedinePref, coffee, specdiet, allergies)
 	{
         this.restaurantPref = restaurantPref;
         this.orderPref = orderPref;
@@ -32,6 +34,7 @@ class UserPreferences
         this.cardPref = cardPref;
         this.fastfoodPref = fastfoodPref;
         this.finedinePref = finedinePref;
+        this.coffee = coffee;
 		this.specdiet.updatespecdiet(specdiet);
 		this.allergies.updateallergies(allergies);
         return this;
@@ -44,6 +47,7 @@ class UserPreferences
         this.cardPref = userpreferences.cardPref;
         this.fastfoodPref = userpreferences.fastfoodPref;
         this.finedinePref = userpreferences.finedinePref;
+        this.coffee = userpreferences.coffee;
 		this.specdiet.updatespecdiet(userpreferences.specdiet);
 		this.allergies.updateallergies(userpreferences.allergies);
         return this;
