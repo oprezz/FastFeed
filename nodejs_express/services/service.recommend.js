@@ -33,7 +33,37 @@ class RecommendationService {
             return true;                
         });
         // console.log("foodWithoutAllergens", foodWithoutAllergens);
-        return foodWithoutAllergens[0];
+
+        var foodWithCorrectService = foodWithoutAllergens.filter(function(foods) {
+            //  isInplace: 0 -> inplace, 1 -> both, 2 -> takeaway ||||| orderpref: 0 -> no order, 10 -> only order
+            if ((user.preferences.orderPref >= 7) && (foods.isInplace) == 0)    // user WANTS to eat TAKEAWAY but the food is only available for INPLACE
+                return false; // food service and user pref does not match
+            if ((user.preferences.orderPref <= 3) && (foods.isInplace) == 2)    // user WANTS to eat INPLACE but food is only available for TAKEAWAY
+                return false;
+            return true;
+        });
+
+        var foodWithCorrectPayment = foodWithCorrectService.filter(function(foods) {
+            //  payment: 0 -> cash, 1 -> both, 2 -> card ||||| cashPref: 0 -> only card, 10 -> only cashm   3--7: both is ok
+            if ((user.preferences.cashPref >= 7) && (foods.payment) == 2)    // user WANTS to pay by CASH but the food is only available by paying with CARD
+                return false; 
+            if ((user.preferences.cashPref <= 3) && (foods.payment) == 0)    // user WANTS to pay by CARD but the food is only available by paying with CASH
+                return false;
+            return true;
+        });
+
+        var filteredFoods = foodWithCorrectPayment.filter(function(foods) {
+            //  foodtype: 0 -> fastfood, 1 -> both/none, 2 -> finedine ||||| fastfoodPref: 0 -> only finedine, 10 -> only fastfood   3--7: both is ok
+            if ((user.preferences.fastfoodPref >= 7) && (foods.foodtype) == 2)    // user WANTS to eat FASTFOOD but the food is FINEDINE
+                return false; 
+            if ((user.preferences.fastfoodPref <= 3) && (foods.foodtype) == 0)    // user WANTS to eat FINEDINE but the food is FASTFOOD
+                return false;
+            return true;
+        });
+
+        
+        var rnd = Math.floor(Math.random() * filteredFoods.length);
+        return filteredFoods[rnd];
     }
 
     static recommendCoffee(user, coffee)
