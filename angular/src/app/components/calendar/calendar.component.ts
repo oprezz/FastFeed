@@ -22,11 +22,13 @@ export class CalendarComponent implements OnInit, AfterViewInit{
 
     @ViewChild('scheduleObj')
     public scheduleObj: ScheduleComponent;
-    public eventSettings: EventSettingsModel;
     public selectedDate: Date = new Date();
     public scheduleViews: View[] = ['Day'];
     public currentView: View = 'Day';
     public multiple = false;
+
+    public eventArray: object[];
+    public recommendedFoodies: object;
 
     @Output() sendDetailsEmitter = new EventEmitter();
 
@@ -37,9 +39,35 @@ export class CalendarComponent implements OnInit, AfterViewInit{
         });
     }
 
-    callForCalendar(): void{
+    callForCalendar(): void {
         this.calendarService.getEventsByGuid(this.user.guid)
-            .subscribe(response => this.scheduleObj.eventSettings.dataSource = response.calendar.EventArray);
+            .subscribe(response => {
+                this.eventArray = response.calendar.EventArray;
+                this.callForRecommendation();
+            });
+    }
+
+    callForRecommendation(): void{
+        this.accountService.generateFoodAdvise(this.user).subscribe( recommendation => {
+            this.recommendedFoodies = recommendation;
+            this.compileRecommendation();
+        });
+    }
+
+    compileRecommendation(): void{
+        this.eventArray = this.eventArray.map(appointment => {
+            // @ts-ignore
+            if (appointment.Subject === 'Lunch'){
+                // @ts-ignore
+                appointment.Subject = this.recommendedFoodies.foods.name;
+                // @ts-ignore
+                appointment.Location = this.recommendedFoodies.foods.place;
+                // @ts-ignore
+                appointment.Description = "Recommendation";
+            }
+            return appointment;
+        });
+        this.scheduleObj.eventSettings.dataSource = this.eventArray;
     }
 
     ngOnInit(): void {}
@@ -47,8 +75,10 @@ export class CalendarComponent implements OnInit, AfterViewInit{
     ngAfterViewInit(): void{}
 
     onEventClick(args: EventClickArgs): void {
-        if ((args.event as unknown as EventData).EventType === 'food') {
-            this.sendDetailsEmitter.emit(parseInt((args.event as unknown as EventData).Other, 10));
+        // @ts-ignore
+        if ((args.event as object).Description === 'Recommendation') {
+            // @ts-ignore
+            this.sendDetailsEmitter.emit(this.recommendedFoodies.foods);
         }
     }
 }

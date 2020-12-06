@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private accountService : AccountService,
-    private router: Router) 
+    private router: Router)
     {
       this.accountService.user.subscribe(x => this.user = x);
     }
@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
       .subscribe( x => console.log("front end received", x)
     );
   }
-  
+
   ngOnInit(): void {
   }
 
