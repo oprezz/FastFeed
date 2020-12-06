@@ -248,7 +248,7 @@ class CalendarService
 
     static async retrieve(ownerGuid)
     {
-        console.log('Requested user by username:', ownerGuid);
+        console.log('Requested user by username @ calendar:', ownerGuid);
         const calendarCol = await db.get().collection("calendars");
         let calendar = await calendarCol.findOne({OwnerGuid: ownerGuid});
         if(calendar == null)
