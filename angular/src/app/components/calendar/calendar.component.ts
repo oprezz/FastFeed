@@ -38,7 +38,7 @@ export class CalendarComponent implements OnInit, AfterViewInit{
            this.callForCalendar();
         });
     }
-
+    
     callForCalendar(): void {
         this.calendarService.getEventsByGuid(this.user.guid)
             .subscribe(response => {
@@ -78,7 +78,7 @@ export class CalendarComponent implements OnInit, AfterViewInit{
         // @ts-ignore
         if ((args.event as object).Description === 'Recommendation') {
             // @ts-ignore
-            this.sendDetailsEmitter.emit(this.recommendedFoodies.foods);
+            this.sendDetailsEmitter.emit(this.recommendedFoodies);
         }
     }
 }

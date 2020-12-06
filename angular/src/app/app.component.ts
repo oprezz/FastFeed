@@ -10,7 +10,7 @@ import {Calendar} from './classes/calendar';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular';
+  title = 'FastFeed';
 
   user: User;
 

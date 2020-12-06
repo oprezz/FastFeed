@@ -4,10 +4,72 @@
     <button type="button" class="close" aria-label="Close" onClick="getElementById('item-details').hidden=true;"
             style="float:right;"><span aria-hidden="true">&times;</span></button>
   </div>
-  <div class="my-card-body">
-    <div>
-      <h2>{{name}}</h2>
-      <img src={{img}} style="max-height: 200px;" alt="" loading="lazy">
-      <p>{{description}}</p>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="my-card-wrapper-pref" style="margin: 20px">
+        <div class="my-card-header-pref">Food</div>
+        <img class="card-img-top" src="{{food.img}}" style="max-height: 200px; max-width: 200px; display:block; margin:auto; margin-top: 10px" alt="" loading="lazy">
+        <div class="my-card-body">
+          <h5 class="card-title">{{food.name}}</h5>
+          <span style="display:inline-block">
+            <span class="card-text h6">Place: </span> <span class="font-weight-light h6">{{food.place}}</span>
+          </span>
+          <h6></h6>
+          <h6 class="card-text">Description:</h6>
+          <p class="card-text">{{food.description}}</p>
+          <div class="row">
+            <div class="col-sm">
+              <h6 class="card-text">Allergens:</h6>
+              <span style="display:inline-block">
+                <span class="card-text h6">Lactose: </span> <span class="font-weight-light h6">{{lactosestring}}</span>
+              </span>
+              <h6></h6>
+              <span style="display:inline-block">
+                <span class="card-text h6">Gluten: </span> <span class="font-weight-light h6"> {{glutenstring}}</span>
+              </span>
+              <h6></h6>
+              <span style="display:inline-block">
+                <span class="card-text h6">Nuts: </span> <span class="font-weight-light h6"> {{nutsstring}}</span>
+              </span>
+            </div>
+            <div class="col-sm">
+              <h6 class="card-text">Diet:</h6>
+              <span style="display:inline-block">
+                <span class="card-text h6">Vegetarian: </span> <span class="font-weight-light h6">{{vegeterianstring}}</span>
+              </span>
+              <h6></h6>
+              <span style="display:inline-block">
+                <span class="card-text h6">Vegan: </span> <span class="font-weight-light h6"> {{veganstring}}</span>
+              </span>
+              <h6></h6>
+              <span style="display:inline-block">
+                <span class="card-text h6">Paleo: </span> <span class="font-weight-light h6"> {{paleostring}}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div *ngIf="coffee">
+        <div class="my-card-wrapper-pref" style="margin: 20px">
+          <div class="my-card-header-pref">Coffee</div>
+          <img class="card-img-top" src="{{coffee.img}}" style="max-height: 200px; max-width: 200px; display:block; margin:auto; margin-top: 10px" alt="" loading="lazy">
+          <div class="my-card-body">
+            <h5 class="card-title">{{coffee.name}}</h5>
+            <span style="display:inline-block">
+              <span class="card-text h6">Intensity:</span> <span class="font-weight-light h6"> {{coffee.intensity}}</span>
+            </span>
+            <h6></h6>
+            <span style="display:inline-block">
+              <span class="card-text h6">Type: </span> <span class="font-weight-light h6">{{coffee.type}}</span>
+            </span>
+            <h6></h6>
+            <h6 class="card-text">Description:</h6>
+            <p class="card-text">{{coffee.description}}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>

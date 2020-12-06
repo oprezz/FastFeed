@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {foodiesGoodies, Food} from '../../classes/foods';
+import {Coffee} from '../../classes/coffee';
 
 @Component({
     selector: 'app-food-details',
@@ -15,18 +16,53 @@ export class FoodDetailsComponent implements OnInit {
     public allergens: string[];
     public specdiet: string[];
 
+    public lactosestring: string;
+    public nutsstring: string;
+    public glutenstring: string;
+    public vegeterianstring: string;
+    public veganstring: string;
+    public paleostring: string;
+    public coffee: Coffee;
+    public food;
     constructor() {}
 
     ngOnInit(): void {}
 
-    receiveFoodId(food): void {
-        console.log(food);
-        this.name = food.name;
-        this.img = food.img;
-        this.description = food.description;
-        this.allergens = food.allergens;
-        this.specdiet = food.specdiet;
+    receiveFoodId(recommendation): void {
+      if(recommendation != null){
+
+        console.log(recommendation);
+        this.food =  recommendation.foods;
+        this.coffee =  recommendation.coffee;
+
+        if(this.food.allergens.nuts)
+          this.nutsstring = "Yes";
+        else
+          this.nutsstring = "No";
+        if(this.food.allergens.lactose)
+          this.lactosestring = "Yes";
+        else
+          this.lactosestring = "No";
+        if(this.food.allergens.gluten)
+          this.glutenstring = "Yes";
+        else
+          this.glutenstring = "No";
+
+        if(this.food.specdiet.vegetarian)
+          this.vegeterianstring = "Yes";
+        else
+          this.vegeterianstring = "No";
+        if(this.food.specdiet.vegan)
+          this.veganstring = "Yes";
+        else
+          this.veganstring = "No";
+        if(this.food.specdiet.paleo)
+          this.paleostring = "Yes";
+        else
+          this.paleostring = "No";
+        
         const detailsCard: HTMLElement = document.getElementById('item-details');
         detailsCard.hidden = false;
+      }
     }
 }

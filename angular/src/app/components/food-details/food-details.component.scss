@@ -1,1 +1,24 @@
 @import '~src/sass/variables';
+
+.my-card-wrapper-pref {
+    @extend .my-card-wrapper;
+    border: 0px solid $iBackgroundGreyDark;
+    box-shadow:
+      0 1.8px 1.2px rgba(0, 0, 0, 0.034),
+      0 4.7px 3.3px rgba(0, 0, 0, 0.048),
+      0 8.5px 6px rgba(0, 0, 0, 0.06),
+      0 12.3px 10.9px rgba(0, 0, 0, 0.072),
+      0 20.8px 20.4px rgba(0, 0, 0, 0.086),
+      0 50px 40px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    // width: 100%;
+    height: auto;
+    // overflow: hidden;
+  }
+  
+  .my-card-header-pref {
+    @extend .my-card-header;
+    font-size: 18px;
+    line-height: 1;
+    background-color: $cardHeaderBackgroundColor;
+  }

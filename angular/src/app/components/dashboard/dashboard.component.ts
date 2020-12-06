@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../services';
+import { User } from '../../classes';
+import { AccountService, AlertService  } from '../../services';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,15 @@ import { AlertService } from '../../services';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  user: User;
+
   constructor(
-    private alertService: AlertService
-  ) { }
+    private accountService: AccountService,
+    private alertService: AlertService) {
+    this.accountService.user.subscribe(x => this.user = x);
+  }
+  
 
   ngOnInit(): void {
     this.alertService.clear();
