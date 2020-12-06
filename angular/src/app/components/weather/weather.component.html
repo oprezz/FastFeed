@@ -1,7 +1,7 @@
-<div style="display: inline-block; margin-left: 10px;">
-    <span style="font-weight: bold;">Weather</span>
-    <span>{{weather.city}}</span>
-    <img [src]="weather.icon" style="float: right;"/>
-    <span>{{weather.conditions}}</span>
-    <span>{{weather.temperature}} °C</span>
+<div style="display: inline-block; font-size: 18px; margin-left: 10px; vertical-align: center; ">
+    <span style="font-weight: bold; margin-left: 10px;">Weather:</span>
+    <span style="margin-left: 10px;">{{weather.city}}</span>
+    <span style="margin-left: 10px;">{{weather.conditions}}</span>
+    <span style="margin-left: 10px;">{{weather.temperature}} °C</span>
+    <img style="margin-left: 10px;" [src]="weather.icon"/>
 </div>

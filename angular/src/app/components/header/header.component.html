@@ -2,7 +2,7 @@
     <a (click)="onLogoClick()">
         <img src="/assets/fastfeed.png" style="height: 100%;" alt="" loading="lazy">
     </a>
-    <app-weather></app-weather>
+    <app-weather *ngIf="user"></app-weather>
     <div *ngIf="user" style="float:right" class="topnav">
         <a (click)="onLogout()">Logout</a>
         <a routerLink="/profile">Profile</a>
